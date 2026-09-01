@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anadolu Saykodeli</title>
-<meta name="description" content="Anadolu Saykodeli — oyunlar, 3D modeller, deneyler ve interaktif projeler.">
+<meta name="description" content="Anadolu Saykodeli — oyunlar, stüdyo işleri, demo kayıtları ve interaktif projeler.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Libre+Franklin:wght@400;600;700;800&display=swap');
 
@@ -685,9 +685,13 @@ footer{
 .feature-cover{
   background:#2f3925;
 }
+/* Öne çıkan kapaktaki eski iç çerçeveyi kaldır */
 .feature-cover:before{
-  z-index:2;
-  pointer-events:none;
+  display:none;
+}
+/* Öne çıkan proje / 45’lik etiketini biraz yukarı al */
+.hero-copy > .kicker{
+  transform:translateY(-16px);
 }
 .feature-cover img,
 .album-art img{
@@ -714,6 +718,110 @@ footer{
   background:rgba(245,231,195,.35);
 }
 
+/* PROJECT DETAIL PAGE */
+.project-detail{
+  border:1.5px solid var(--line);
+  background:rgba(242,226,189,.67);
+  padding:clamp(18px,3vw,36px);
+  box-shadow:7px 7px 0 rgba(59,39,21,.08);
+}
+.detail-back{
+  border:0;
+  background:transparent;
+  color:var(--rust);
+  padding:0 0 18px;
+  cursor:pointer;
+  font-family:"DM Mono",monospace;
+  font-weight:700;
+  text-transform:uppercase;
+}
+.detail-back:hover{text-decoration:underline}
+.project-detail-grid{
+  display:grid;
+  grid-template-columns:minmax(280px,520px) minmax(0,1fr);
+  gap:clamp(24px,4vw,58px);
+  align-items:start;
+}
+.project-detail-cover{
+  aspect-ratio:1/1;
+  border:1.5px solid #665136;
+  background:#2f3925;
+  overflow:hidden;
+  box-shadow:7px 7px 0 rgba(67,45,26,.12);
+}
+.project-detail-cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.project-detail-copy .kicker{margin:4px 0 8px}
+.project-detail-copy h1{
+  font-family:"Bebas Neue",sans-serif;
+  color:#4e2c1b;
+  font-size:clamp(52px,7vw,104px);
+  letter-spacing:1px;
+  line-height:.88;
+  margin:0 0 14px;
+}
+.detail-meta{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-bottom:22px;
+}
+.detail-meta span{
+  border:1px solid var(--line);
+  padding:6px 8px;
+  font-family:"DM Mono",monospace;
+  text-transform:uppercase;
+  font-size:10px;
+  background:#ead8ae;
+}
+.detail-description{
+  max-width:760px;
+  font-family:"DM Mono",monospace;
+  line-height:1.8;
+  font-size:14px;
+  color:#4f402d;
+  white-space:pre-line;
+}
+.detail-panels{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin:26px 0;
+}
+.detail-panel{
+  border-top:1px solid rgba(97,74,47,.45);
+  padding-top:14px;
+}
+.detail-panel h3{
+  margin:0 0 10px;
+  color:var(--rust);
+  font-family:"DM Mono",monospace;
+  font-size:11px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.detail-panel p,
+.detail-panel li{
+  font-family:"DM Mono",monospace;
+  font-size:12px;
+  line-height:1.65;
+}
+.detail-panel ul{margin:0;padding-left:18px}
+.detail-action{margin-top:4px}
+.project-open-target{cursor:pointer}
+.project-open-target:focus-visible{outline:2px solid var(--rust);outline-offset:3px}
+@media(max-width:850px){
+  .project-detail-grid{grid-template-columns:1fr}
+  .project-detail-cover{max-width:560px}
+}
+@media(max-width:560px){
+  .detail-panels{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -723,7 +831,7 @@ footer{
   <div class="brand">
     <div class="top">ANADOLU</div>
     <div class="bottom">SAYKODELİ</div>
-    <small>OYUN · 3D · DENEYLER · ETKİLEŞİMLİ İŞLER</small>
+    <small>OYUN · STÜDYO · DEMO KAYITLARI · ETKİLEŞİMLİ İŞLER</small>
   </div>
 
   <nav aria-label="Ana menü">
@@ -741,7 +849,7 @@ footer{
 
 <div class="rule">
   <div><span class="status-dot"></span><b>PLAK RAFI AÇIK</b></div>
-  <div>kod · tasarım · oyun · 3d · psikedelik</div>
+  <div>kod · tasarım · oyun · stüdyo · psikedelik</div>
 </div>
 
 <!-- HOME -->
@@ -764,7 +872,7 @@ footer{
   <section class="info-strip">
     <div class="info-box">
       <h4>DÜKKAN HAKKINDA</h4>
-      <p>Oynanabilir projeler plak mantığıyla sınıflanır: 10 dakikadan kısa işler 45’lik, 10 dakika ve üzeri işler 33’lük olarak rafa girer. 3D modeller ise kendi proje türüyle gösterilir.</p>
+      <p>Oynanabilir projeler plak mantığıyla sınıflanır: 10 dakikadan kısa işler 45’lik, 10 dakika ve üzeri işler 33’lük olarak rafa girer. Oyun dışı bitmiş işler Stüdyo’da, tamamlanmamış denemeler ise Demo Kayıtları’nda tutulur.</p>
     </div>
     <div class="info-box">
       <h4>YENİ GELENLER</h4>
@@ -772,7 +880,7 @@ footer{
     </div>
     <div class="info-box">
       <h4>RAF DURUMU</h4>
-      <p>Web oyunları doğrudan tarayıcıda açılır. Downloadable projeler kendi sayfalarına yönlendirilir. 3D çalışmalar da Projeler rafında yer alır.</p>
+      <p>Web oyunları doğrudan tarayıcıda açılır. Downloadable projeler kendi sayfalarına yönlendirilir. 3D, pixel art, görsel ve benzeri bitmiş üretimler Stüdyo’da; yarım prototipler ve deneyler Demo Kayıtları’nda yer alır.</p>
     </div>
   </section>
 </section>
@@ -786,20 +894,25 @@ footer{
       <div class="filter-block">
         <label class="head">Proje Türü</label>
         <label class="check"><input type="checkbox" class="project-type-filter" value="game"> Oyun</label>
-        <label class="check"><input type="checkbox" class="project-type-filter" value="3d"> 3D Model</label>
+        <label class="check"><input type="checkbox" class="project-type-filter" value="studio"> Stüdyo</label>
+        <label class="check"><input type="checkbox" class="project-type-filter" value="demo"> Demo Kayıtları</label>
       </div>
 
       <div class="filter-block">
-        <label class="head">Genre</label>
+        <label class="head">Kategori</label>
         <label class="check"><input type="checkbox" class="genre-filter" value="arcade"> Arcade</label>
         <label class="check"><input type="checkbox" class="genre-filter" value="puzzle"> Puzzle</label>
         <label class="check"><input type="checkbox" class="genre-filter" value="story"> Hikâye</label>
         <label class="check"><input type="checkbox" class="genre-filter" value="experimental"> Experimental</label>
         <label class="check"><input type="checkbox" class="genre-filter" value="strategy"> Strateji</label>
+        <label class="check"><input type="checkbox" class="genre-filter" value="3d"> 3D</label>
+        <label class="check"><input type="checkbox" class="genre-filter" value="pixel-art"> Pixel Art</label>
+        <label class="check"><input type="checkbox" class="genre-filter" value="visual"> Görsel Tasarım</label>
+        <label class="check"><input type="checkbox" class="genre-filter" value="audio"> Ses / Müzik</label>
       </div>
 
       <div class="filter-block">
-        <label class="head">Oyun Türü</label>
+        <label class="head">Yayın</label>
         <label class="check"><input type="checkbox" class="delivery-filter" value="web"> Web Game</label>
         <label class="check"><input type="checkbox" class="delivery-filter" value="download"> Downloadable</label>
       </div>
@@ -832,6 +945,39 @@ footer{
   </div>
 </section>
 
+
+<!-- PROJECT DETAIL -->
+<section class="page" id="projectDetail">
+  <div class="project-detail">
+    <button class="detail-back" id="detailBack">← RAFA DÖN</button>
+
+    <div class="project-detail-grid">
+      <div class="project-detail-cover" id="detailCover"></div>
+
+      <div class="project-detail-copy">
+        <div class="kicker" id="detailKicker">PROJE</div>
+        <h1 id="detailTitle">PROJE</h1>
+        <div class="detail-meta" id="detailMeta"></div>
+        <p class="detail-description" id="detailDescription"></p>
+
+        <div class="detail-panels">
+          <div class="detail-panel" id="detailAboutPanel">
+            <h3>PROJE NOTU</h3>
+            <p id="detailAbout"></p>
+          </div>
+
+          <div class="detail-panel" id="detailControlsPanel">
+            <h3>KONTROLLER</h3>
+            <ul id="detailControls"></ul>
+          </div>
+        </div>
+
+        <a class="primary detail-action" id="detailAction" href="#">OYNA →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section class="page" id="about">
   <div class="content-card">
@@ -840,11 +986,11 @@ footer{
     <p>
       Ben Emir. Oyun tasarımı ve geliştirme tarafında çalışan bağımsız bir geliştiriciyim.
       Unreal Engine ve Godot ile oyunlar, prototipler ve game jam projeleri geliştiriyorum.
-      3D modelleme, görsel tasarım ve fiziksel üretim tarafıyla da ilgileniyorum.
+      3D modelleme, pixel art, görsel tasarım ve fiziksel üretim tarafıyla da ilgileniyorum.
     </p>
     <p>
-      Anadolu Saykodeli, yaptığım oyunları ve 3D çalışmalarını plak dükkânı mantığıyla arşivleyen kişisel portfolyom.
-      Oynanabilir işlerde 10 dakikadan kısa projeler “45’lik”, 10 dakika ve üzeri projeler “33’lük” olarak sınıflanır.
+      Anadolu Saykodeli, oyunları ve farklı üretimleri plak dükkânı mantığıyla arşivleyen kişisel portfolyom.
+      Oynanabilir işlerde 10 dakikadan kısa projeler “45’lik”, 10 dakika ve üzeri projeler “33’lük” olarak sınıflanır. Oyun dışı bitmiş işler “Stüdyo”, tamamlanmamış prototip ve deneyler “Demo Kayıtları” altında yer alır.
     </p>
 
     <div class="about-grid">
@@ -853,16 +999,16 @@ footer{
         <p>Gameplay sistemleri, prototipleme, level tasarımı, Unreal Engine ve Godot.</p>
       </div>
       <div class="mini-panel">
-        <h3>3D ÜRETİM</h3>
-        <p>3D modelleme, texturing, stil araştırması ve oyun üretimine yönelik görsel çalışmalar.</p>
+        <h3>STÜDYO</h3>
+        <p>3D modelleme, pixel art, texturing, görsel tasarım, fiziksel üretim ve oyun dışındaki bitmiş çalışmalar.</p>
       </div>
       <div class="mini-panel">
-        <h3>GAME JAM</h3>
-        <p>Kısıtlı sürede küçük ama bitmiş fikirler çıkarmak; özellikle mekanik ve tema denemeleri.</p>
+        <h3>DEMO KAYITLARI</h3>
+        <p>Henüz tamamlanmamış prototipler, yarım fikirler, mekanik testleri ve yayınlamaya değer küçük deneyler.</p>
       </div>
       <div class="mini-panel">
         <h3>ANADOLU SAYKODELİ</h3>
-        <p>Oyunlar, 3D modeller, deneyler ve zamanla büyüyecek kişisel proje rafı.</p>
+        <p>Oyunlar, Stüdyo işleri, Demo Kayıtları ve zamanla büyüyecek kişisel proje rafı.</p>
       </div>
     </div>
   </div>
@@ -897,6 +1043,19 @@ const count = document.getElementById('resultCount');
 const sortSelect = document.getElementById('sort');
 const clearFilters = document.getElementById('clearFilters');
 
+const detailBack = document.getElementById('detailBack');
+const detailCover = document.getElementById('detailCover');
+const detailKicker = document.getElementById('detailKicker');
+const detailTitle = document.getElementById('detailTitle');
+const detailMeta = document.getElementById('detailMeta');
+const detailDescription = document.getElementById('detailDescription');
+const detailAboutPanel = document.getElementById('detailAboutPanel');
+const detailAbout = document.getElementById('detailAbout');
+const detailControlsPanel = document.getElementById('detailControlsPanel');
+const detailControls = document.getElementById('detailControls');
+const detailAction = document.getElementById('detailAction');
+let detailReturnPage = 'projects';
+
 const projectTypeFilters = [...document.querySelectorAll('.project-type-filter')];
 const genreFilters = [...document.querySelectorAll('.genre-filter')];
 const deliveryFilters = [...document.querySelectorAll('.delivery-filter')];
@@ -921,27 +1080,76 @@ function safeProjects(){
 }
 
 function projectTypeLabel(project){
-  return project.type === '3d' ? '3D MODEL' : 'OYUN';
+  if(project.type === 'studio' || project.type === '3d') return 'STÜDYO';
+  if(project.type === 'demo') return 'DEMO KAYDI';
+  return 'OYUN';
 }
 
 function formatLabel(project){
-  if(project.type !== 'game') return '3D MODEL';
+  if(project.type === 'studio' || project.type === '3d') return 'STÜDYO';
+  if(project.type === 'demo') return 'DEMO KAYDI';
   if(project.format === '33') return '33’LİK';
   if(project.format === '45') return '45’LİK';
   return 'OYUN';
 }
 
 function deliveryLabel(project){
-  if(project.type === '3d') return '3D';
   if(project.delivery === 'web' || project.playable === true) return 'WEB';
   if(project.delivery === 'download') return 'DOWNLOAD';
+  if(project.type === 'studio' || project.type === '3d') return 'STÜDYO';
+  if(project.type === 'demo') return 'DEMO';
   return 'OYUN';
 }
 
 function buttonLabel(project){
-  if(project.type === 'game' && (project.delivery === 'web' || project.playable === true)) return 'OYNA →';
+  if(project.delivery === 'web' || project.playable === true) return 'OYNA →';
   return 'İNCELE →';
 }
+
+function openProjectDetail(project, returnPage='projects'){
+  if(!project) return;
+
+  detailReturnPage = returnPage;
+  detailCover.innerHTML = project.cover
+    ? `<img src="${project.cover}" alt="${project.title || 'Proje'} kapağı">`
+    : '';
+
+  detailKicker.textContent = `${projectTypeLabel(project)} · ${formatLabel(project)}`;
+  detailTitle.textContent = project.title || 'İsimsiz Proje';
+  detailDescription.textContent = project.description || 'Bu proje için henüz açıklama eklenmedi.';
+
+  detailMeta.innerHTML = '';
+  [project.genre, deliveryLabel(project), project.year].filter(Boolean).forEach(value=>{
+    const span = document.createElement('span');
+    span.textContent = String(value).toUpperCase();
+    detailMeta.appendChild(span);
+  });
+
+  const aboutText = project.details || project.about || '';
+  detailAbout.textContent = aboutText;
+  detailAboutPanel.style.display = aboutText ? 'block' : 'none';
+
+  detailControls.innerHTML = '';
+  const controls = Array.isArray(project.controls) ? project.controls : [];
+  controls.forEach(control=>{
+    const li = document.createElement('li');
+    li.textContent = control;
+    detailControls.appendChild(li);
+  });
+  detailControlsPanel.style.display = controls.length ? 'block' : 'none';
+
+  if(project.url){
+    detailAction.href = project.url;
+    detailAction.textContent = buttonLabel(project);
+    detailAction.style.display = 'inline-block';
+  }else{
+    detailAction.style.display = 'none';
+  }
+
+  openPage('projectDetail');
+}
+
+detailBack.addEventListener('click',()=>openPage(detailReturnPage));
 
 function projectCard(project){
   const article = document.createElement('article');
@@ -954,7 +1162,10 @@ function projectCard(project){
   article.dataset.year = String(project.year || 0);
 
   const art = document.createElement('div');
-  art.className = 'album-art real-cover';
+  art.className = 'album-art real-cover project-open-target';
+  art.tabIndex = 0;
+  art.setAttribute('role','button');
+  art.setAttribute('aria-label', `${project.title || 'Proje'} detaylarını aç`);
 
   const img = document.createElement('img');
   img.src = project.cover || '';
@@ -964,22 +1175,32 @@ function projectCard(project){
 
   const title = document.createElement('h3');
   title.textContent = project.title || 'İsimsiz Proje';
+  title.classList.add('project-open-target');
 
   const meta = document.createElement('div');
   meta.className = 'meta';
   meta.innerHTML = `<span>${projectTypeLabel(project)} · ${project.genre || formatLabel(project)}</span><span>${deliveryLabel(project)} · ${project.year || ''}</span>`;
 
+  const openDetail = ()=>openProjectDetail(project, 'projects');
+  art.addEventListener('click', openDetail);
+  art.addEventListener('keydown', e=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      openDetail();
+    }
+  });
+  title.addEventListener('click', openDetail);
+
   article.appendChild(art);
   article.appendChild(title);
   article.appendChild(meta);
 
-  if(project.url){
-    const link = document.createElement('a');
-    link.className = 'play';
-    link.href = project.url;
-    link.textContent = buttonLabel(project);
-    article.appendChild(link);
-  }
+  const link = document.createElement('button');
+  link.className = 'play';
+  link.type = 'button';
+  link.textContent = 'DETAYLAR →';
+  link.addEventListener('click', openDetail);
+  article.appendChild(link);
 
   return article;
 }
@@ -1075,13 +1296,13 @@ function renderHome(){
       featuredTags.appendChild(span);
     });
 
-    if(featured.url){
-      featuredLink.href = featured.url;
-      featuredLink.textContent = buttonLabel(featured);
-      featuredLink.style.display = 'inline-block';
-    }else{
-      featuredLink.style.display = 'none';
-    }
+    featuredLink.href = '#';
+    featuredLink.textContent = 'PROJEYİ İNCELE →';
+    featuredLink.style.display = 'inline-block';
+    featuredLink.onclick = e=>{
+      e.preventDefault();
+      openProjectDetail(featured, 'home');
+    };
   }else{
     featuredCover.innerHTML = '';
     featuredTitle.textContent = 'Henüz proje yok';
@@ -1120,9 +1341,16 @@ function renderHome(){
         tags.appendChild(span);
       });
 
-      if(project.url){
-        article.addEventListener('click',()=>window.location.href=project.url);
-      }
+      article.tabIndex = 0;
+      article.setAttribute('role','button');
+      article.setAttribute('aria-label', `${project.title} detaylarını aç`);
+      article.addEventListener('click',()=>openProjectDetail(project, 'home'));
+      article.addEventListener('keydown', e=>{
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          openProjectDetail(project, 'home');
+        }
+      });
 
       article.appendChild(art);
       article.appendChild(title);
