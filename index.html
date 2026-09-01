@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anadolu Saykodeli</title>
-<meta name="description" content="Anadolu Saykodeli — oyunlar, deneyler ve interaktif projeler.">
+<meta name="description" content="Anadolu Saykodeli — oyunlar, 3D modeller, deneyler ve interaktif projeler.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Libre+Franklin:wght@400;600;700;800&display=swap');
 
@@ -679,6 +679,41 @@ footer{
   .cover-grid,.games-grid{grid-template-columns:1fr}
   .rule{font-size:9px}
 }
+
+
+/* REAL PROJECT COVERS */
+.feature-cover{
+  background:#2f3925;
+}
+.feature-cover:before{
+  z-index:2;
+  pointer-events:none;
+}
+.feature-cover img,
+.album-art img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.album-art.real-cover:before,
+.album-art.real-cover:after{
+  display:none;
+}
+.primary{
+  display:inline-block;
+  text-decoration:none;
+}
+.empty-state{
+  grid-column:1/-1;
+  border:1.5px dashed var(--line);
+  padding:28px;
+  text-align:center;
+  font-family:"DM Mono",monospace;
+  color:#66543b;
+  background:rgba(245,231,195,.35);
+}
+
 </style>
 </head>
 <body>
@@ -688,107 +723,71 @@ footer{
   <div class="brand">
     <div class="top">ANADOLU</div>
     <div class="bottom">SAYKODELİ</div>
-    <small>OYUNLAR · DENEYLER · ETKİLEŞİMLİ İŞLER</small>
+    <small>OYUN · 3D · DENEYLER · ETKİLEŞİMLİ İŞLER</small>
   </div>
 
   <nav aria-label="Ana menü">
     <button class="nav-btn active" data-page="home">Anasayfa</button>
-    <button class="nav-btn" data-page="games">Oyunlar</button>
+    <button class="nav-btn" data-page="projects">Projeler</button>
     <button class="nav-btn" data-page="about">Hakkımda</button>
     <button class="nav-btn" data-page="contact">İletişim</button>
   </nav>
 
   <div class="search-wrap">
-    <input id="globalSearch" type="search" placeholder="Oyun / proje ara...">
+    <input id="globalSearch" type="search" placeholder="Proje ara...">
     <button id="searchBtn" aria-label="Ara">⌕</button>
   </div>
 </header>
 
 <div class="rule">
   <div><span class="status-dot"></span><b>PLAK RAFI AÇIK</b></div>
-  <div>kod · tasarım · oyun · psikedelik</div>
+  <div>kod · tasarım · oyun · 3d · psikedelik</div>
 </div>
 
 <!-- HOME -->
 <section class="page active" id="home">
-  <section class="hero">
-    <div class="feature-cover">
-      <div class="cover-title">KIZIL<br>TEPE</div>
-      <div class="mountain"></div>
-      <div class="cover-kicker">38’LİK / ÖNE ÇIKAN PROJE</div>
-    </div>
+  <section class="hero" id="featuredProject">
+    <div class="feature-cover" id="featuredCover"></div>
 
     <div class="hero-copy">
-      <div class="kicker">Öne çıkan proje ★ 38’lik</div>
-      <h1>Kızıl Tepe</h1>
-      <p>
-        Anadolu’nun hayali bir coğrafyasında geçen, keşif ve gizem odaklı deneysel bir oyun.
-        Bu bölüm büyük projeler için: albüm gibi. Kapak 1:1, proje büyükse burada 38’lik olarak öne çıkıyor.
-      </p>
-      <div class="tags">
-        <span class="tag">Macera</span>
-        <span class="tag">Keşif</span>
-        <span class="tag">Downloadable</span>
-      </div>
-      <button class="primary" onclick="alert('Şimdilik demo butonu. Sonra gerçek oyun sayfasına bağlarız.')">PROJEYİ İNCELE →</button>
+      <div class="kicker" id="featuredKicker">Öne çıkan proje</div>
+      <h1 id="featuredTitle">Proje yükleniyor</h1>
+      <p id="featuredDescription">Projeler hazırlanıyor.</p>
+      <div class="tags" id="featuredTags"></div>
+      <a class="primary" id="featuredLink" href="#">PROJEYİ İNCELE →</a>
     </div>
   </section>
 
-  <div class="section-head"><span>45’LİKLER</span> KÜÇÜK OYUNLAR & JAM PROJELERİ</div>
-
-  <div class="cover-grid">
-    <article class="album">
-      <div class="album-art art1"><div class="title">GECE<br>VAPURU</div><div class="stamp">JAM GAME</div></div>
-      <h3>Gece Vapuru</h3><small>2026 · Web Game</small>
-      <div class="mini-tags"><span>Hikâye</span><span>Web</span></div>
-    </article>
-    <article class="album">
-      <div class="album-art art2"><div class="title">NAZAR<br>404</div><div class="stamp">EXPERIMENT</div></div>
-      <h3>Nazar 404</h3><small>2026 · Downloadable</small>
-      <div class="mini-tags"><span>Arcade</span><span>PC</span></div>
-    </article>
-    <article class="album">
-      <div class="album-art art3"><div class="title">DAMLADAKİ<br>EVREN</div><div class="stamp">WEB GAME</div></div>
-      <h3>Damladaki Evren</h3><small>2026 · Web Game</small>
-      <div class="mini-tags"><span>Puzzle</span><span>Web</span></div>
-    </article>
-    <article class="album">
-      <div class="album-art art4"><div class="title">TULUM<br>EXPRESS</div><div class="stamp">JAM GAME</div></div>
-      <h3>Tulum Express</h3><small>2025 · Downloadable</small>
-      <div class="mini-tags"><span>Arcade</span><span>PC</span></div>
-    </article>
-    <article class="album">
-      <div class="album-art art5"><div class="title">KIRIK<br>FREKANS</div><div class="stamp">PROTOTYPE</div></div>
-      <h3>Kırık Frekans</h3><small>2025 · Web Game</small>
-      <div class="mini-tags"><span>Experimental</span><span>Web</span></div>
-    </article>
-  </div>
+  <div class="section-head"><span>45’LİKLER</span> 10 DAKİKADAN KISA OYNANABİLİR PROJELER</div>
+  <div class="cover-grid" id="homeProjectsGrid"></div>
 
   <section class="info-strip">
     <div class="info-box">
       <h4>DÜKKAN HAKKINDA</h4>
-      <p>Her proje bir plak kapağı gibi sunulur. Büyük işler 38’lik, kısa oyunlar ve jam projeleri 45’lik olarak rafa girer.</p>
+      <p>Oynanabilir projeler plak mantığıyla sınıflanır: 10 dakikadan kısa işler 45’lik, 10 dakika ve üzeri işler 33’lük olarak rafa girer. 3D modeller ise kendi proje türüyle gösterilir.</p>
     </div>
     <div class="info-box">
       <h4>YENİ GELENLER</h4>
-      <ul>
-        <li>Gece Vapuru — yeni 45’lik</li>
-        <li>Nazar 404 — güncellendi</li>
-        <li>Kırık Frekans — prototip</li>
-      </ul>
+      <ul id="newArrivals"></ul>
     </div>
     <div class="info-box">
       <h4>RAF DURUMU</h4>
-      <p>Web oyunları tarayıcıda oynanır. Downloadable projeler kendi sayfalarından indirilir.</p>
+      <p>Web oyunları doğrudan tarayıcıda açılır. Downloadable projeler kendi sayfalarına yönlendirilir. 3D çalışmalar da Projeler rafında yer alır.</p>
     </div>
   </section>
 </section>
 
-<!-- GAMES -->
-<section class="page" id="games">
+<!-- PROJECTS -->
+<section class="page" id="projects">
   <div class="games-layout">
     <aside class="filters">
       <h2>FİLTRELER</h2>
+
+      <div class="filter-block">
+        <label class="head">Proje Türü</label>
+        <label class="check"><input type="checkbox" class="project-type-filter" value="game"> Oyun</label>
+        <label class="check"><input type="checkbox" class="project-type-filter" value="3d"> 3D Model</label>
+      </div>
 
       <div class="filter-block">
         <label class="head">Genre</label>
@@ -800,9 +799,15 @@ footer{
       </div>
 
       <div class="filter-block">
-        <label class="head">Tür</label>
-        <label class="check"><input type="checkbox" class="type-filter" value="web"> Web Games</label>
-        <label class="check"><input type="checkbox" class="type-filter" value="download"> Downloadable</label>
+        <label class="head">Oyun Türü</label>
+        <label class="check"><input type="checkbox" class="delivery-filter" value="web"> Web Game</label>
+        <label class="check"><input type="checkbox" class="delivery-filter" value="download"> Downloadable</label>
+      </div>
+
+      <div class="filter-block">
+        <label class="head">Plak</label>
+        <label class="check"><input type="checkbox" class="format-filter" value="33"> 33’lük</label>
+        <label class="check"><input type="checkbox" class="format-filter" value="45"> 45’lik</label>
       </div>
 
       <div class="filter-block">
@@ -818,65 +823,11 @@ footer{
 
     <main>
       <div class="game-results-head">
-        <h1>OYUN RAFI</h1>
-        <span id="resultCount">9 PLAK BULUNDU</span>
+        <h1>PROJE RAFI</h1>
+        <span id="resultCount">0 PROJE BULUNDU</span>
       </div>
 
-      <div class="games-grid" id="gamesGrid">
-        <article class="game-card" data-name="Gece Vapuru" data-genre="story" data-type="web" data-year="2026">
-          <div class="album-art art1"><div class="title">GECE<br>VAPURU</div><div class="stamp">WEB GAME</div></div>
-          <h3>Gece Vapuru</h3><div class="meta"><span>Hikâye</span><span>Web</span></div>
-          <button class="play">OYNA →</button>
-        </article>
-
-        <article class="game-card" data-name="Nazar 404" data-genre="arcade" data-type="download" data-year="2026">
-          <div class="album-art art2"><div class="title">NAZAR<br>404</div><div class="stamp">PC</div></div>
-          <h3>Nazar 404</h3><div class="meta"><span>Arcade</span><span>Download</span></div>
-          <button class="play">İNCELE →</button>
-        </article>
-
-        <article class="game-card" data-name="Damladaki Evren" data-genre="puzzle" data-type="web" data-year="2026">
-          <div class="album-art art3"><div class="title">DAMLADAKİ<br>EVREN</div><div class="stamp">WEB GAME</div></div>
-          <h3>Damladaki Evren</h3><div class="meta"><span>Puzzle</span><span>Web</span></div>
-          <button class="play">OYNA →</button>
-        </article>
-
-        <article class="game-card" data-name="Tulum Express" data-genre="arcade" data-type="download" data-year="2025">
-          <div class="album-art art4"><div class="title">TULUM<br>EXPRESS</div><div class="stamp">PC</div></div>
-          <h3>Tulum Express</h3><div class="meta"><span>Arcade</span><span>Download</span></div>
-          <button class="play">İNCELE →</button>
-        </article>
-
-        <article class="game-card" data-name="Kırık Frekans" data-genre="experimental" data-type="web" data-year="2025">
-          <div class="album-art art5"><div class="title">KIRIK<br>FREKANS</div><div class="stamp">WEB GAME</div></div>
-          <h3>Kırık Frekans</h3><div class="meta"><span>Experimental</span><span>Web</span></div>
-          <button class="play">OYNA →</button>
-        </article>
-
-        <article class="game-card" data-name="Sümer Terminali" data-genre="strategy" data-type="download" data-year="2025">
-          <div class="album-art art6"><div class="title">SÜMER<br>TERMİNALİ</div><div class="stamp">PC</div></div>
-          <h3>Sümer Terminali</h3><div class="meta"><span>Strateji</span><span>Download</span></div>
-          <button class="play">İNCELE →</button>
-        </article>
-
-        <article class="game-card" data-name="Koyuncağın İsyanı" data-genre="arcade" data-type="web" data-year="2024">
-          <div class="album-art art7"><div class="title">KOYUNCAĞIN<br>İSYANI</div><div class="stamp">WEB GAME</div></div>
-          <h3>Koyuncağın İsyanı</h3><div class="meta"><span>Arcade</span><span>Web</span></div>
-          <button class="play">OYNA →</button>
-        </article>
-
-        <article class="game-card" data-name="Sis" data-genre="story" data-type="download" data-year="2024">
-          <div class="album-art art8"><div class="title">SİS</div><div class="stamp">PC</div></div>
-          <h3>Sis</h3><div class="meta"><span>Hikâye</span><span>Download</span></div>
-          <button class="play">İNCELE →</button>
-        </article>
-
-        <article class="game-card" data-name="Baklava Simülatörü" data-genre="experimental" data-type="web" data-year="2024">
-          <div class="album-art art9"><div class="title">BAKLAVA<br>SİMÜLATÖRÜ</div><div class="stamp">WEB GAME</div></div>
-          <h3>Baklava Simülatörü</h3><div class="meta"><span>Experimental</span><span>Web</span></div>
-          <button class="play">OYNA →</button>
-        </article>
-      </div>
+      <div class="games-grid" id="projectsGrid"></div>
     </main>
   </div>
 </section>
@@ -892,8 +843,8 @@ footer{
       3D modelleme, görsel tasarım ve fiziksel üretim tarafıyla da ilgileniyorum.
     </p>
     <p>
-      Anadolu Saykodeli, klasik bir portfolyo gibi davranmak yerine yaptığım işleri bir plak dükkânı mantığıyla arşivlemek için var:
-      büyük projeler “38’lik”, daha küçük oyunlar, deneyler ve jam işleri “45’lik”.
+      Anadolu Saykodeli, yaptığım oyunları ve 3D çalışmalarını plak dükkânı mantığıyla arşivleyen kişisel portfolyom.
+      Oynanabilir işlerde 10 dakikadan kısa projeler “45’lik”, 10 dakika ve üzeri projeler “33’lük” olarak sınıflanır.
     </p>
 
     <div class="about-grid">
@@ -902,8 +853,8 @@ footer{
         <p>Gameplay sistemleri, prototipleme, level tasarımı, Unreal Engine ve Godot.</p>
       </div>
       <div class="mini-panel">
-        <h3>GÖRSEL ÜRETİM</h3>
-        <p>3D modelleme, stil araştırması, retro estetikler, pixel-art odaklı küçük projeler.</p>
+        <h3>3D ÜRETİM</h3>
+        <p>3D modelleme, texturing, stil araştırması ve oyun üretimine yönelik görsel çalışmalar.</p>
       </div>
       <div class="mini-panel">
         <h3>GAME JAM</h3>
@@ -911,7 +862,7 @@ footer{
       </div>
       <div class="mini-panel">
         <h3>ANADOLU SAYKODELİ</h3>
-        <p>Oyun portfolyosu, kişisel arşiv ve zamanla büyüyecek küçük bir internet oyun dükkânı.</p>
+        <p>Oyunlar, 3D modeller, deneyler ve zamanla büyüyecek kişisel proje rafı.</p>
       </div>
     </div>
   </div>
@@ -922,25 +873,34 @@ footer{
   <div class="content-card">
     <div class="kicker">İLETİŞİM</div>
     <h1>BİR PLAK BIRAK.</h1>
-    <p>
-      Proje, iş, oyun, işbirliği veya sadece “bu neymiş?” diye yazmak için:
-    </p>
+    <p>Proje, iş, oyun, işbirliği veya sadece “bu neymiş?” diye yazmak için:</p>
     <a class="contact-link" href="mailto:emirozdemir2255@gmail.com">emirozdemir2255@gmail.com</a>
   </div>
 </section>
 
 <footer>
   <span>© 2026 ANADOLU SAYKODELİ</span>
-  <span>BAĞIMSIZ OYUN RAFI · İSTANBUL</span>
+  <span>BAĞIMSIZ PROJE RAFI · İSTANBUL</span>
 </footer>
 
 </div>
 
+<script src="js/projects.js"></script>
 <script>
 const navButtons = document.querySelectorAll('.nav-btn');
 const pages = document.querySelectorAll('.page');
 const globalSearch = document.getElementById('globalSearch');
 const searchBtn = document.getElementById('searchBtn');
+const projectsGrid = document.getElementById('projectsGrid');
+const homeProjectsGrid = document.getElementById('homeProjectsGrid');
+const count = document.getElementById('resultCount');
+const sortSelect = document.getElementById('sort');
+const clearFilters = document.getElementById('clearFilters');
+
+const projectTypeFilters = [...document.querySelectorAll('.project-type-filter')];
+const genreFilters = [...document.querySelectorAll('.genre-filter')];
+const deliveryFilters = [...document.querySelectorAll('.delivery-filter')];
+const formatFilters = [...document.querySelectorAll('.format-filter')];
 
 function openPage(id){
   pages.forEach(p => p.classList.toggle('active', p.id === id));
@@ -952,70 +912,244 @@ navButtons.forEach(btn=>{
   btn.addEventListener('click',()=>openPage(btn.dataset.page));
 });
 
+function selectedValues(inputs){
+  return inputs.filter(i=>i.checked).map(i=>i.value);
+}
+
+function safeProjects(){
+  return Array.isArray(window.projects) ? window.projects : (typeof projects !== 'undefined' && Array.isArray(projects) ? projects : []);
+}
+
+function projectTypeLabel(project){
+  return project.type === '3d' ? '3D MODEL' : 'OYUN';
+}
+
+function formatLabel(project){
+  if(project.type !== 'game') return '3D MODEL';
+  if(project.format === '33') return '33’LİK';
+  if(project.format === '45') return '45’LİK';
+  return 'OYUN';
+}
+
+function deliveryLabel(project){
+  if(project.type === '3d') return '3D';
+  if(project.delivery === 'web' || project.playable === true) return 'WEB';
+  if(project.delivery === 'download') return 'DOWNLOAD';
+  return 'OYUN';
+}
+
+function buttonLabel(project){
+  if(project.type === 'game' && (project.delivery === 'web' || project.playable === true)) return 'OYNA →';
+  return 'İNCELE →';
+}
+
+function projectCard(project){
+  const article = document.createElement('article');
+  article.className = 'game-card';
+  article.dataset.name = project.title || '';
+  article.dataset.type = project.type || '';
+  article.dataset.genre = project.genre || '';
+  article.dataset.delivery = project.delivery || (project.playable ? 'web' : '');
+  article.dataset.format = project.format || '';
+  article.dataset.year = String(project.year || 0);
+
+  const art = document.createElement('div');
+  art.className = 'album-art real-cover';
+
+  const img = document.createElement('img');
+  img.src = project.cover || '';
+  img.alt = `${project.title || 'Proje'} kapağı`;
+  img.loading = 'lazy';
+  art.appendChild(img);
+
+  const title = document.createElement('h3');
+  title.textContent = project.title || 'İsimsiz Proje';
+
+  const meta = document.createElement('div');
+  meta.className = 'meta';
+  meta.innerHTML = `<span>${projectTypeLabel(project)} · ${project.genre || formatLabel(project)}</span><span>${deliveryLabel(project)} · ${project.year || ''}</span>`;
+
+  article.appendChild(art);
+  article.appendChild(title);
+  article.appendChild(meta);
+
+  if(project.url){
+    const link = document.createElement('a');
+    link.className = 'play';
+    link.href = project.url;
+    link.textContent = buttonLabel(project);
+    article.appendChild(link);
+  }
+
+  return article;
+}
+
+function renderProjects(list){
+  projectsGrid.innerHTML = '';
+
+  if(list.length === 0){
+    projectsGrid.innerHTML = '<div class="empty-state">Bu filtrelere uyan proje bulunamadı.</div>';
+  }else{
+    list.forEach(project => projectsGrid.appendChild(projectCard(project)));
+  }
+
+  count.textContent = `${list.length} PROJE BULUNDU`;
+}
+
+function applyFilters(externalQuery=null){
+  const types = selectedValues(projectTypeFilters);
+  const genres = selectedValues(genreFilters);
+  const deliveries = selectedValues(deliveryFilters);
+  const formats = selectedValues(formatFilters);
+  const q = (externalQuery !== null ? externalQuery : globalSearch.value).trim().toLocaleLowerCase('tr');
+
+  let filtered = [...safeProjects()].filter(project=>{
+    const name = (project.title || '').toLocaleLowerCase('tr');
+    const matchesQ = !q || name.includes(q);
+    const matchesType = types.length === 0 || types.includes(project.type);
+    const matchesGenre = genres.length === 0 || genres.includes(project.genre);
+    const projectDelivery = project.delivery || (project.playable ? 'web' : '');
+    const matchesDelivery = deliveries.length === 0 || deliveries.includes(projectDelivery);
+    const matchesFormat = formats.length === 0 || formats.includes(project.format);
+
+    return matchesQ && matchesType && matchesGenre && matchesDelivery && matchesFormat;
+  });
+
+  filtered.sort((a,b)=>{
+    if(sortSelect.value === 'name'){
+      return (a.title || '').localeCompare(b.title || '', 'tr');
+    }
+    return Number(b.year || 0) - Number(a.year || 0);
+  });
+
+  renderProjects(filtered);
+}
+
 function runGlobalSearch(){
   const q = globalSearch.value.trim();
-  openPage('games');
+  openPage('projects');
   applyFilters(q);
 }
+
 searchBtn.addEventListener('click', runGlobalSearch);
 globalSearch.addEventListener('keydown', e=>{
   if(e.key === 'Enter') runGlobalSearch();
 });
 
-const genreFilters = [...document.querySelectorAll('.genre-filter')];
-const typeFilters = [...document.querySelectorAll('.type-filter')];
-const sortSelect = document.getElementById('sort');
-const clearFilters = document.getElementById('clearFilters');
-const gamesGrid = document.getElementById('gamesGrid');
-const count = document.getElementById('resultCount');
+[...projectTypeFilters,...genreFilters,...deliveryFilters,...formatFilters].forEach(el=>{
+  el.addEventListener('change',()=>applyFilters());
+});
 
-function selectedValues(inputs){
-  return inputs.filter(i=>i.checked).map(i=>i.value);
-}
-
-function applyFilters(externalQuery=null){
-  const genres = selectedValues(genreFilters);
-  const types = selectedValues(typeFilters);
-  const q = (externalQuery !== null ? externalQuery : globalSearch.value).trim().toLocaleLowerCase('tr');
-
-  let cards = [...gamesGrid.querySelectorAll('.game-card')];
-
-  cards.forEach(card=>{
-    const name = card.dataset.name.toLocaleLowerCase('tr');
-    const matchesQ = !q || name.includes(q);
-    const matchesGenre = genres.length === 0 || genres.includes(card.dataset.genre);
-    const matchesType = types.length === 0 || types.includes(card.dataset.type);
-    card.classList.toggle('hidden', !(matchesQ && matchesGenre && matchesType));
-  });
-
-  const visible = cards.filter(c=>!c.classList.contains('hidden'));
-
-  visible.sort((a,b)=>{
-    if(sortSelect.value === 'name'){
-      return a.dataset.name.localeCompare(b.dataset.name,'tr');
-    }
-    return Number(b.dataset.year)-Number(a.dataset.year);
-  });
-  visible.forEach(c=>gamesGrid.appendChild(c));
-
-  count.textContent = `${visible.length} PLAK BULUNDU`;
-}
-
-[...genreFilters,...typeFilters].forEach(el=>el.addEventListener('change',()=>applyFilters()));
 sortSelect.addEventListener('change',()=>applyFilters());
 
 clearFilters.addEventListener('click',()=>{
-  [...genreFilters,...typeFilters].forEach(i=>i.checked=false);
+  [...projectTypeFilters,...genreFilters,...deliveryFilters,...formatFilters].forEach(i=>i.checked=false);
   globalSearch.value='';
   sortSelect.value='new';
   applyFilters('');
 });
 
-document.querySelectorAll('.play').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    alert('Bu butonu sonra gerçek oyun sayfasına / WebGL buildine bağlarız.');
-  });
-});
+function renderHome(){
+  const all = [...safeProjects()];
+  const featured = all.find(p=>p.featured === true) || all.find(p=>p.type === 'game' && p.format === '33') || all[0];
+
+  const featuredCover = document.getElementById('featuredCover');
+  const featuredKicker = document.getElementById('featuredKicker');
+  const featuredTitle = document.getElementById('featuredTitle');
+  const featuredDescription = document.getElementById('featuredDescription');
+  const featuredTags = document.getElementById('featuredTags');
+  const featuredLink = document.getElementById('featuredLink');
+
+  if(featured){
+    featuredCover.innerHTML = `<img src="${featured.cover}" alt="${featured.title} kapağı">`;
+    featuredKicker.textContent = `Öne çıkan proje ★ ${formatLabel(featured)}`;
+    featuredTitle.textContent = featured.title;
+    featuredDescription.textContent = featured.description || 'Anadolu Saykodeli proje rafından öne çıkan çalışma.';
+    featuredTags.innerHTML = '';
+
+    const tagValues = featured.tags || [projectTypeLabel(featured), featured.genre, deliveryLabel(featured)];
+    tagValues.filter(Boolean).forEach(tag=>{
+      const span = document.createElement('span');
+      span.className = 'tag';
+      span.textContent = tag;
+      featuredTags.appendChild(span);
+    });
+
+    if(featured.url){
+      featuredLink.href = featured.url;
+      featuredLink.textContent = buttonLabel(featured);
+      featuredLink.style.display = 'inline-block';
+    }else{
+      featuredLink.style.display = 'none';
+    }
+  }else{
+    featuredCover.innerHTML = '';
+    featuredTitle.textContent = 'Henüz proje yok';
+    featuredDescription.textContent = 'İlk proje projects.js dosyasına eklendiğinde burada görünecek.';
+    featuredTags.innerHTML = '';
+    featuredLink.style.display = 'none';
+  }
+
+  const singles = all
+    .filter(p=>p.type === 'game' && p.format === '45')
+    .sort((a,b)=>Number(b.year || 0)-Number(a.year || 0));
+
+  homeProjectsGrid.innerHTML = '';
+  if(singles.length === 0){
+    homeProjectsGrid.innerHTML = '<div class="empty-state">Henüz 45’lik proje yok.</div>';
+  }else{
+    singles.forEach(project=>{
+      const article = document.createElement('article');
+      article.className = 'album';
+
+      const art = document.createElement('div');
+      art.className = 'album-art real-cover';
+      art.innerHTML = `<img src="${project.cover}" alt="${project.title} kapağı" loading="lazy">`;
+
+      const title = document.createElement('h3');
+      title.textContent = project.title;
+
+      const small = document.createElement('small');
+      small.textContent = `${project.year || ''} · ${deliveryLabel(project)}`;
+
+      const tags = document.createElement('div');
+      tags.className = 'mini-tags';
+      [project.genre, '45’LİK'].filter(Boolean).forEach(value=>{
+        const span = document.createElement('span');
+        span.textContent = value;
+        tags.appendChild(span);
+      });
+
+      if(project.url){
+        article.addEventListener('click',()=>window.location.href=project.url);
+      }
+
+      article.appendChild(art);
+      article.appendChild(title);
+      article.appendChild(small);
+      article.appendChild(tags);
+      homeProjectsGrid.appendChild(article);
+    });
+  }
+
+  const arrivals = document.getElementById('newArrivals');
+  arrivals.innerHTML = '';
+  [...all]
+    .sort((a,b)=>Number(b.year || 0)-Number(a.year || 0))
+    .slice(0,3)
+    .forEach(project=>{
+      const li = document.createElement('li');
+      li.textContent = `${project.title} — ${formatLabel(project)}`;
+      arrivals.appendChild(li);
+    });
+
+  if(all.length === 0){
+    arrivals.innerHTML = '<li>Henüz proje eklenmedi.</li>';
+  }
+}
+
+renderHome();
+applyFilters('');
 </script>
 </body>
 </html>
