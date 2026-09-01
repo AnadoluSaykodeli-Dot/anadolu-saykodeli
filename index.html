@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anadolu Saykodeli</title>
+<meta name="description" content="Anadolu Saykodeli — oyunlar, deneyler ve interaktif projeler.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Libre+Franklin:wght@400;600;700;800&display=swap');
+
+:root{
+  --paper:#e9d6a9;
+  --paper2:#f2e2bd;
+  --ink:#241b13;
+  --green:#39442a;
+  --green2:#515f35;
+  --rust:#b34d28;
+  --orange:#d26932;
+  --mustard:#d0a140;
+  --cream:#f7edcf;
+  --line:#7e6747;
+  --purple:#6e4f66;
+  --blue:#4c6972;
+  --shadow:rgba(53,34,17,.24);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 0%, rgba(255,255,255,.45), transparent 28%),
+    radial-gradient(circle at 90% 60%, rgba(179,77,40,.06), transparent 30%),
+    var(--paper);
+  font-family:"Libre Franklin",Arial,sans-serif;
+}
+
+/* paper grain */
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:999;
+  opacity:.11;
+  background-image:
+    repeating-radial-gradient(circle at 0 0, transparent 0 2px, rgba(70,50,25,.18) 3px, transparent 4px);
+  background-size:11px 11px;
+  mix-blend-mode:multiply;
+}
+
+a{color:inherit}
+button,input,select{font:inherit}
+
+.shell{
+  max-width:1440px;
+  margin:0 auto;
+  padding:24px 30px 34px;
+}
+
+/* HEADER */
+header{
+  display:grid;
+  grid-template-columns:minmax(250px,1.1fr) auto minmax(230px,.8fr);
+  align-items:end;
+  gap:24px;
+  padding:8px 2px 16px;
+}
+.brand{
+  line-height:.82;
+  text-transform:uppercase;
+  letter-spacing:-1px;
+}
+.brand .top{
+  font-family:"Bebas Neue",sans-serif;
+  font-size:clamp(50px,5vw,82px);
+  color:var(--green);
+  text-shadow:2px 2px 0 rgba(173,99,48,.25);
+}
+.brand .bottom{
+  font-family:"Bebas Neue",sans-serif;
+  font-size:clamp(28px,2.7vw,46px);
+  color:var(--rust);
+  letter-spacing:1px;
+}
+.brand small{
+  display:block;
+  margin-top:10px;
+  font-family:"DM Mono",monospace;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:2px;
+  color:#5e4b33;
+}
+
+nav{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.nav-btn{
+  border:0;
+  background:transparent;
+  color:var(--green);
+  padding:10px 12px;
+  cursor:pointer;
+  font-family:"DM Mono",monospace;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  border-bottom:2px solid transparent;
+}
+.nav-btn:hover,
+.nav-btn.active{
+  color:var(--rust);
+  border-color:var(--rust);
+}
+
+.search-wrap{
+  display:flex;
+  background:rgba(248,238,207,.72);
+  border:1.5px solid var(--line);
+  height:42px;
+  box-shadow:3px 3px 0 rgba(71,49,28,.08);
+}
+.search-wrap input{
+  width:100%;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  padding:0 12px;
+  color:var(--ink);
+}
+.search-wrap button{
+  width:46px;
+  border:0;
+  border-left:1.5px solid var(--line);
+  background:var(--green);
+  color:var(--cream);
+  cursor:pointer;
+  font-size:18px;
+}
+
+.rule{
+  height:50px;
+  background:var(--green);
+  border-radius:4px;
+  border:2px solid #29321f;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  color:var(--cream);
+  font-family:"DM Mono",monospace;
+  text-transform:uppercase;
+  font-size:12px;
+  letter-spacing:1px;
+  margin-bottom:16px;
+  box-shadow:0 4px 0 rgba(49,33,16,.12);
+}
+.rule b{color:#f0bf58}
+.rule .status-dot{
+  width:9px;height:9px;border-radius:50%;background:#efbc50;display:inline-block;margin-right:7px;
+  box-shadow:0 0 0 4px rgba(239,188,80,.12);
+}
+
+/* pages */
+.page{display:none}
+.page.active{display:block}
+
+/* HERO */
+.hero{
+  border:1.5px solid var(--line);
+  background:rgba(242,226,189,.66);
+  padding:18px;
+  display:grid;
+  grid-template-columns:minmax(310px,.82fr) 1.18fr;
+  gap:28px;
+  box-shadow:6px 6px 0 rgba(64,42,23,.08);
+  position:relative;
+  overflow:hidden;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  width:480px;height:480px;
+  right:-190px;top:-190px;
+  border:54px solid rgba(179,77,40,.07);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 40px rgba(57,68,42,.04),
+    0 0 0 80px rgba(208,161,64,.04);
+}
+
+.feature-cover{
+  aspect-ratio:1/1;
+  min-height:0;
+  position:relative;
+  overflow:hidden;
+  border:1.5px solid #5e4a31;
+  background:
+    radial-gradient(circle at 50% 48%, #f3c65d 0 8%, #b74528 8% 17%, transparent 17%),
+    repeating-radial-gradient(circle at 50% 50%, rgba(38,28,19,.12) 0 2px, transparent 3px 9px),
+    conic-gradient(from -20deg,#8a3826,#c56131,#dec05e,#607044,#b64b2a,#75462e,#8a3826);
+}
+.feature-cover:before{
+  content:"";
+  position:absolute; inset:9%;
+  border:2px solid rgba(247,237,207,.8);
+  box-shadow:0 0 0 8px rgba(39,31,20,.2), inset 0 0 0 6px rgba(39,31,20,.22);
+  transform:rotate(-2deg);
+}
+.feature-cover .mountain{
+  position:absolute;
+  left:-5%; right:-5%; bottom:-3%;
+  height:44%;
+  background:
+    linear-gradient(155deg,transparent 0 18%,#34452d 19% 31%,transparent 32%),
+    linear-gradient(205deg,transparent 0 20%,#594930 21% 38%,transparent 39%),
+    linear-gradient(170deg,transparent 0 33%,#253b2d 34% 58%,transparent 59%),
+    #b86b35;
+  clip-path:polygon(0 100%,0 48%,10% 56%,18% 36%,29% 55%,39% 23%,52% 58%,65% 34%,77% 54%,88% 31%,100% 50%,100% 100%);
+  opacity:.9;
+}
+.feature-cover .cover-title{
+  position:absolute;
+  top:7%; left:7%; right:7%;
+  color:#f7eac7;
+  font-family:"Bebas Neue",sans-serif;
+  font-size:clamp(42px,5vw,86px);
+  letter-spacing:1px;
+  line-height:.88;
+  text-shadow:3px 3px 0 rgba(63,33,17,.5);
+}
+.feature-cover .cover-kicker{
+  position:absolute;
+  bottom:8%; left:8%;
+  font-family:"DM Mono",monospace;
+  font-weight:700;
+  font-size:12px;
+  color:#fff4ce;
+  background:rgba(43,53,31,.9);
+  padding:8px 10px;
+}
+
+.hero-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+  z-index:2;
+  padding:10px 30px 10px 0;
+}
+.kicker{
+  font-family:"DM Mono",monospace;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:12px;
+  color:var(--rust);
+  font-weight:700;
+}
+.hero h1{
+  font-family:"Bebas Neue",sans-serif;
+  color:#4e2c1b;
+  font-size:clamp(54px,7vw,108px);
+  letter-spacing:1px;
+  margin:8px 0 6px;
+  line-height:.85;
+}
+.hero p{
+  max-width:660px;
+  font-family:"DM Mono",monospace;
+  line-height:1.7;
+  color:#4f422f;
+  font-size:14px;
+}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}
+.tag{
+  border:1px solid var(--line);
+  padding:6px 8px;
+  font-family:"DM Mono",monospace;
+  text-transform:uppercase;
+  font-size:11px;
+  background:#ead8ae;
+}
+.primary{
+  width:max-content;
+  border:1px solid #2f3823;
+  background:var(--green);
+  color:var(--cream);
+  padding:12px 17px;
+  font-family:"DM Mono",monospace;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:3px 3px 0 #c49a53;
+}
+.primary:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 #c49a53}
+
+/* SECTION */
+.section-head{
+  margin:24px 0 12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-family:"DM Mono",monospace;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-weight:700;
+}
+.section-head:after{
+  content:"";
+  flex:1;
+  border-top:1px solid rgba(91,71,46,.5);
+}
+.section-head span{color:var(--rust)}
+
+.cover-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:16px;
+}
+.album{
+  cursor:pointer;
+  position:relative;
+}
+.album-art{
+  aspect-ratio:1/1;
+  border:1.5px solid #665136;
+  position:relative;
+  overflow:hidden;
+  box-shadow:4px 4px 0 rgba(67,45,26,.12);
+  transition:.16s ease;
+}
+.album:hover .album-art{
+  transform:translateY(-4px) rotate(-.5deg);
+  box-shadow:7px 7px 0 rgba(67,45,26,.16);
+}
+.album h3{
+  margin:10px 0 2px;
+  font-family:"Bebas Neue",sans-serif;
+  font-size:24px;
+  letter-spacing:.5px;
+}
+.album small{
+  color:#66543b;
+  font-family:"DM Mono",monospace;
+  font-size:10px;
+  text-transform:uppercase;
+}
+.album .mini-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.album .mini-tags span{
+  border:1px solid #8c7655;
+  padding:3px 5px;
+  font-family:"DM Mono",monospace;
+  font-size:9px;
+  text-transform:uppercase;
+  background:rgba(249,237,204,.55);
+}
+
+.art1{
+  background:
+    radial-gradient(circle at 72% 28%,#f4ce5b 0 7%,transparent 7.4%),
+    linear-gradient(165deg,transparent 0 48%,#263b31 49% 68%,transparent 69%),
+    linear-gradient(20deg,#3e6b65,#1d3d4a 50%,#d27a3e 51%,#77351f);
+}
+.art2{
+  background:
+    radial-gradient(circle at 48% 54%,transparent 0 9%,#e6b752 9.5% 12%,transparent 12.5%),
+    repeating-conic-gradient(from 10deg,#63314a 0 10deg,#bb4e33 10deg 20deg,#d29f47 20deg 30deg);
+}
+.art3{
+  background:
+    radial-gradient(circle at 50% 50%,#ecd06c 0 6%,#28402d 6% 16%,transparent 16%),
+    repeating-radial-gradient(circle at 50% 50%,transparent 0 18px,rgba(227,191,80,.75) 19px 22px,transparent 23px 40px),
+    #355e5a;
+}
+.art4{
+  background:
+    linear-gradient(transparent 0 56%,#263d39 57% 62%,#c87335 63% 69%,#e7c15a 70%),
+    radial-gradient(circle at 75% 25%,#dfb642 0 8%,transparent 8.5%),
+    #4d6871;
+}
+.art5{
+  background:
+    conic-gradient(from 25deg at 50% 50%,#7a2636,#cb5e31,#e3b848,#4e6738,#3c5e64,#7a2636);
+}
+.art6{
+  background:
+    radial-gradient(ellipse at 50% 105%,#2c4330 0 38%,transparent 39%),
+    radial-gradient(circle at 50% 32%,#d9aa43 0 9%,transparent 9.5%),
+    linear-gradient(#223b4b,#775038 52%,#bc6733);
+}
+.art7{
+  background:
+    repeating-linear-gradient(45deg,#8c3c2a 0 18px,#c06338 18px 36px,#d7a84b 36px 54px,#3e5736 54px 72px);
+}
+.art8{
+  background:
+    radial-gradient(circle at 50% 50%,#e4bc55 0 6%,transparent 6.5%),
+    conic-gradient(#1f3d41,#476b62,#c16c37,#9a3e2c,#3c2a33,#1f3d41);
+}
+.art9{
+  background:
+    linear-gradient(90deg,transparent 0 20%,rgba(245,226,181,.25) 20% 22%,transparent 22% 78%,rgba(245,226,181,.25) 78% 80%,transparent 80%),
+    repeating-radial-gradient(circle at 50% 50%,#602f2a 0 10px,#c56f36 11px 22px,#d3a746 23px 34px,#364b37 35px 46px);
+}
+.art10{
+  background:
+    radial-gradient(circle at 50% 52%,transparent 0 15%,#dfb850 15.5% 20%,transparent 20.5%),
+    linear-gradient(140deg,#3c2b48,#663c5c 42%,#ba5231 43%,#d9a84a);
+}
+
+/* decorative center labels on albums */
+.album-art:before{
+  content:"";
+  position:absolute;
+  width:42%; aspect-ratio:1/1;
+  border-radius:50%;
+  left:29%; top:29%;
+  border:2px solid rgba(250,232,187,.8);
+  box-shadow:0 0 0 8px rgba(41,31,22,.22);
+  background:rgba(36,29,21,.14);
+}
+.album-art:after{
+  content:"";
+  position:absolute;
+  width:7%; aspect-ratio:1/1;
+  border-radius:50%;
+  left:46.5%; top:46.5%;
+  background:#ead89e;
+  border:2px solid rgba(45,34,23,.7);
+}
+.album-art .title{
+  position:absolute;
+  inset:9% 8% auto;
+  z-index:3;
+  text-align:center;
+  color:#fff0c9;
+  font-family:"Bebas Neue",sans-serif;
+  font-size:clamp(20px,2vw,34px);
+  line-height:.9;
+  text-shadow:2px 2px 0 rgba(37,27,18,.55);
+}
+.album-art .stamp{
+  position:absolute;
+  z-index:3;
+  bottom:8%;
+  left:50%;
+  transform:translateX(-50%);
+  color:#f5e7bf;
+  font-family:"DM Mono",monospace;
+  font-size:9px;
+  background:rgba(37,50,31,.85);
+  padding:4px 6px;
+  white-space:nowrap;
+}
+
+/* Footer info */
+.info-strip{
+  margin-top:28px;
+  background:var(--green);
+  color:#f1e2bb;
+  border:2px solid #29331f;
+  display:grid;
+  grid-template-columns:1.1fr 1fr .9fr;
+}
+.info-box{
+  padding:18px 20px;
+  border-right:1px solid rgba(242,225,184,.22);
+}
+.info-box:last-child{border-right:0}
+.info-box h4{
+  margin:0 0 8px;
+  font-family:"Bebas Neue",sans-serif;
+  font-size:24px;
+  color:#e5b655;
+  letter-spacing:.7px;
+}
+.info-box p,.info-box li{
+  font-family:"DM Mono",monospace;
+  font-size:11px;
+  line-height:1.6;
+  margin:0;
+}
+.info-box ul{padding-left:17px;margin:0}
+footer{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:14px 2px 0;
+  font-family:"DM Mono",monospace;
+  font-size:10px;
+  color:#635139;
+}
+
+/* GAMES PAGE */
+.games-layout{
+  display:grid;
+  grid-template-columns:260px minmax(0,1fr);
+  gap:26px;
+  align-items:start;
+}
+.filters{
+  border:1.5px solid var(--line);
+  background:rgba(242,226,189,.64);
+  padding:16px;
+  position:sticky;
+  top:18px;
+}
+.filters h2{
+  font-family:"Bebas Neue",sans-serif;
+  margin:0 0 16px;
+  font-size:34px;
+}
+.filter-block{
+  border-top:1px solid rgba(97,74,47,.35);
+  padding:14px 0;
+}
+.filter-block:first-of-type{border-top:0}
+.filter-block label.head{
+  display:block;
+  font-family:"DM Mono",monospace;
+  text-transform:uppercase;
+  color:var(--rust);
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:9px;
+}
+.check{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin:8px 0;
+  font-family:"DM Mono",monospace;
+  font-size:11px;
+}
+.check input{accent-color:var(--green)}
+.filter-block select{
+  width:100%;
+  border:1px solid #836b49;
+  background:#efdeb5;
+  padding:9px;
+  outline:0;
+}
+.game-results-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin-bottom:12px;
+}
+.game-results-head h1{
+  font-family:"Bebas Neue",sans-serif;
+  font-size:50px;
+  margin:0;
+}
+.game-results-head span{
+  font-family:"DM Mono",monospace;
+  font-size:11px;
+  color:#67553c;
+}
+.games-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+.game-card{
+  border:1px solid rgba(103,80,51,.4);
+  padding:9px 9px 13px;
+  background:rgba(245,231,195,.48);
+}
+.game-card.hidden{display:none}
+.game-card .album-art{box-shadow:none}
+.game-card h3{
+  font-family:"Bebas Neue",sans-serif;
+  font-size:28px;
+  margin:9px 0 2px;
+}
+.game-card .meta{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-family:"DM Mono",monospace;
+  text-transform:uppercase;
+  font-size:9px;
+  color:#665139;
+}
+.game-card .play{
+  display:block;
+  width:100%;
+  margin-top:10px;
+  padding:9px;
+  border:1px solid #44512f;
+  background:transparent;
+  color:#37422a;
+  cursor:pointer;
+  font-family:"DM Mono",monospace;
+  font-size:11px;
+}
+.game-card .play:hover{
+  background:var(--green);
+  color:var(--cream);
+}
+
+/* ABOUT + CONTACT */
+.content-card{
+  border:1.5px solid var(--line);
+  background:rgba(242,226,189,.67);
+  padding:clamp(24px,4vw,55px);
+  max-width:980px;
+  margin:0 auto;
+  box-shadow:7px 7px 0 rgba(59,39,21,.08);
+}
+.content-card h1{
+  font-family:"Bebas Neue",sans-serif;
+  margin:0 0 18px;
+  font-size:clamp(52px,7vw,92px);
+  color:#4b2c1b;
+}
+.content-card p{
+  font-family:"DM Mono",monospace;
+  line-height:1.8;
+  font-size:14px;
+  color:#4f402d;
+}
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:25px;
+}
+.mini-panel{
+  padding:18px;
+  background:rgba(57,68,42,.94);
+  color:#f3e4bd;
+}
+.mini-panel h3{
+  margin:0 0 10px;
+  color:#e9ba57;
+  font-family:"Bebas Neue",sans-serif;
+  font-size:28px;
+}
+.mini-panel p{color:#f3e4bd;font-size:11px;margin:0}
+.contact-link{
+  display:inline-block;
+  margin-top:14px;
+  font-family:"DM Mono",monospace;
+  padding:13px 16px;
+  background:var(--rust);
+  color:#fff0d0;
+  text-decoration:none;
+  border:1px solid #77301b;
+}
+.contact-link:hover{background:#913a21}
+
+@media(max-width:1100px){
+  header{grid-template-columns:1fr;align-items:start}
+  nav{justify-content:flex-start}
+  .search-wrap{max-width:500px}
+  .cover-grid{grid-template-columns:repeat(3,1fr)}
+  .games-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .shell{padding:16px}
+  .hero{grid-template-columns:1fr}
+  .hero-copy{padding:0}
+  .cover-grid{grid-template-columns:repeat(2,1fr)}
+  .games-layout{grid-template-columns:1fr}
+  .filters{position:static}
+  .games-grid{grid-template-columns:repeat(2,1fr)}
+  .info-strip{grid-template-columns:1fr}
+  .info-box{border-right:0;border-bottom:1px solid rgba(242,225,184,.22)}
+  .about-grid{grid-template-columns:1fr}
+}
+@media(max-width:500px){
+  .cover-grid,.games-grid{grid-template-columns:1fr}
+  .rule{font-size:9px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<header>
+  <div class="brand">
+    <div class="top">ANADOLU</div>
+    <div class="bottom">SAYKODELİ</div>
+    <small>OYUNLAR · DENEYLER · ETKİLEŞİMLİ İŞLER</small>
+  </div>
+
+  <nav aria-label="Ana menü">
+    <button class="nav-btn active" data-page="home">Anasayfa</button>
+    <button class="nav-btn" data-page="games">Oyunlar</button>
+    <button class="nav-btn" data-page="about">Hakkımda</button>
+    <button class="nav-btn" data-page="contact">İletişim</button>
+  </nav>
+
+  <div class="search-wrap">
+    <input id="globalSearch" type="search" placeholder="Oyun / proje ara...">
+    <button id="searchBtn" aria-label="Ara">⌕</button>
+  </div>
+</header>
+
+<div class="rule">
+  <div><span class="status-dot"></span><b>PLAK RAFI AÇIK</b></div>
+  <div>kod · tasarım · oyun · psikedelik</div>
+</div>
+
+<!-- HOME -->
+<section class="page active" id="home">
+  <section class="hero">
+    <div class="feature-cover">
+      <div class="cover-title">KIZIL<br>TEPE</div>
+      <div class="mountain"></div>
+      <div class="cover-kicker">38’LİK / ÖNE ÇIKAN PROJE</div>
+    </div>
+
+    <div class="hero-copy">
+      <div class="kicker">Öne çıkan proje ★ 38’lik</div>
+      <h1>Kızıl Tepe</h1>
+      <p>
+        Anadolu’nun hayali bir coğrafyasında geçen, keşif ve gizem odaklı deneysel bir oyun.
+        Bu bölüm büyük projeler için: albüm gibi. Kapak 1:1, proje büyükse burada 38’lik olarak öne çıkıyor.
+      </p>
+      <div class="tags">
+        <span class="tag">Macera</span>
+        <span class="tag">Keşif</span>
+        <span class="tag">Downloadable</span>
+      </div>
+      <button class="primary" onclick="alert('Şimdilik demo butonu. Sonra gerçek oyun sayfasına bağlarız.')">PROJEYİ İNCELE →</button>
+    </div>
+  </section>
+
+  <div class="section-head"><span>45’LİKLER</span> KÜÇÜK OYUNLAR & JAM PROJELERİ</div>
+
+  <div class="cover-grid">
+    <article class="album">
+      <div class="album-art art1"><div class="title">GECE<br>VAPURU</div><div class="stamp">JAM GAME</div></div>
+      <h3>Gece Vapuru</h3><small>2026 · Web Game</small>
+      <div class="mini-tags"><span>Hikâye</span><span>Web</span></div>
+    </article>
+    <article class="album">
+      <div class="album-art art2"><div class="title">NAZAR<br>404</div><div class="stamp">EXPERIMENT</div></div>
+      <h3>Nazar 404</h3><small>2026 · Downloadable</small>
+      <div class="mini-tags"><span>Arcade</span><span>PC</span></div>
+    </article>
+    <article class="album">
+      <div class="album-art art3"><div class="title">DAMLADAKİ<br>EVREN</div><div class="stamp">WEB GAME</div></div>
+      <h3>Damladaki Evren</h3><small>2026 · Web Game</small>
+      <div class="mini-tags"><span>Puzzle</span><span>Web</span></div>
+    </article>
+    <article class="album">
+      <div class="album-art art4"><div class="title">TULUM<br>EXPRESS</div><div class="stamp">JAM GAME</div></div>
+      <h3>Tulum Express</h3><small>2025 · Downloadable</small>
+      <div class="mini-tags"><span>Arcade</span><span>PC</span></div>
+    </article>
+    <article class="album">
+      <div class="album-art art5"><div class="title">KIRIK<br>FREKANS</div><div class="stamp">PROTOTYPE</div></div>
+      <h3>Kırık Frekans</h3><small>2025 · Web Game</small>
+      <div class="mini-tags"><span>Experimental</span><span>Web</span></div>
+    </article>
+  </div>
+
+  <section class="info-strip">
+    <div class="info-box">
+      <h4>DÜKKAN HAKKINDA</h4>
+      <p>Her proje bir plak kapağı gibi sunulur. Büyük işler 38’lik, kısa oyunlar ve jam projeleri 45’lik olarak rafa girer.</p>
+    </div>
+    <div class="info-box">
+      <h4>YENİ GELENLER</h4>
+      <ul>
+        <li>Gece Vapuru — yeni 45’lik</li>
+        <li>Nazar 404 — güncellendi</li>
+        <li>Kırık Frekans — prototip</li>
+      </ul>
+    </div>
+    <div class="info-box">
+      <h4>RAF DURUMU</h4>
+      <p>Web oyunları tarayıcıda oynanır. Downloadable projeler kendi sayfalarından indirilir.</p>
+    </div>
+  </section>
+</section>
+
+<!-- GAMES -->
+<section class="page" id="games">
+  <div class="games-layout">
+    <aside class="filters">
+      <h2>FİLTRELER</h2>
+
+      <div class="filter-block">
+        <label class="head">Genre</label>
+        <label class="check"><input type="checkbox" class="genre-filter" value="arcade"> Arcade</label>
+        <label class="check"><input type="checkbox" class="genre-filter" value="puzzle"> Puzzle</label>
+        <label class="check"><input type="checkbox" class="genre-filter" value="story"> Hikâye</label>
+        <label class="check"><input type="checkbox" class="genre-filter" value="experimental"> Experimental</label>
+        <label class="check"><input type="checkbox" class="genre-filter" value="strategy"> Strateji</label>
+      </div>
+
+      <div class="filter-block">
+        <label class="head">Tür</label>
+        <label class="check"><input type="checkbox" class="type-filter" value="web"> Web Games</label>
+        <label class="check"><input type="checkbox" class="type-filter" value="download"> Downloadable</label>
+      </div>
+
+      <div class="filter-block">
+        <label class="head" for="sort">Sıralama</label>
+        <select id="sort">
+          <option value="new">En yeni</option>
+          <option value="name">İsim A-Z</option>
+        </select>
+      </div>
+
+      <button class="primary" id="clearFilters" style="width:100%">TEMİZLE</button>
+    </aside>
+
+    <main>
+      <div class="game-results-head">
+        <h1>OYUN RAFI</h1>
+        <span id="resultCount">9 PLAK BULUNDU</span>
+      </div>
+
+      <div class="games-grid" id="gamesGrid">
+        <article class="game-card" data-name="Gece Vapuru" data-genre="story" data-type="web" data-year="2026">
+          <div class="album-art art1"><div class="title">GECE<br>VAPURU</div><div class="stamp">WEB GAME</div></div>
+          <h3>Gece Vapuru</h3><div class="meta"><span>Hikâye</span><span>Web</span></div>
+          <button class="play">OYNA →</button>
+        </article>
+
+        <article class="game-card" data-name="Nazar 404" data-genre="arcade" data-type="download" data-year="2026">
+          <div class="album-art art2"><div class="title">NAZAR<br>404</div><div class="stamp">PC</div></div>
+          <h3>Nazar 404</h3><div class="meta"><span>Arcade</span><span>Download</span></div>
+          <button class="play">İNCELE →</button>
+        </article>
+
+        <article class="game-card" data-name="Damladaki Evren" data-genre="puzzle" data-type="web" data-year="2026">
+          <div class="album-art art3"><div class="title">DAMLADAKİ<br>EVREN</div><div class="stamp">WEB GAME</div></div>
+          <h3>Damladaki Evren</h3><div class="meta"><span>Puzzle</span><span>Web</span></div>
+          <button class="play">OYNA →</button>
+        </article>
+
+        <article class="game-card" data-name="Tulum Express" data-genre="arcade" data-type="download" data-year="2025">
+          <div class="album-art art4"><div class="title">TULUM<br>EXPRESS</div><div class="stamp">PC</div></div>
+          <h3>Tulum Express</h3><div class="meta"><span>Arcade</span><span>Download</span></div>
+          <button class="play">İNCELE →</button>
+        </article>
+
+        <article class="game-card" data-name="Kırık Frekans" data-genre="experimental" data-type="web" data-year="2025">
+          <div class="album-art art5"><div class="title">KIRIK<br>FREKANS</div><div class="stamp">WEB GAME</div></div>
+          <h3>Kırık Frekans</h3><div class="meta"><span>Experimental</span><span>Web</span></div>
+          <button class="play">OYNA →</button>
+        </article>
+
+        <article class="game-card" data-name="Sümer Terminali" data-genre="strategy" data-type="download" data-year="2025">
+          <div class="album-art art6"><div class="title">SÜMER<br>TERMİNALİ</div><div class="stamp">PC</div></div>
+          <h3>Sümer Terminali</h3><div class="meta"><span>Strateji</span><span>Download</span></div>
+          <button class="play">İNCELE →</button>
+        </article>
+
+        <article class="game-card" data-name="Koyuncağın İsyanı" data-genre="arcade" data-type="web" data-year="2024">
+          <div class="album-art art7"><div class="title">KOYUNCAĞIN<br>İSYANI</div><div class="stamp">WEB GAME</div></div>
+          <h3>Koyuncağın İsyanı</h3><div class="meta"><span>Arcade</span><span>Web</span></div>
+          <button class="play">OYNA →</button>
+        </article>
+
+        <article class="game-card" data-name="Sis" data-genre="story" data-type="download" data-year="2024">
+          <div class="album-art art8"><div class="title">SİS</div><div class="stamp">PC</div></div>
+          <h3>Sis</h3><div class="meta"><span>Hikâye</span><span>Download</span></div>
+          <button class="play">İNCELE →</button>
+        </article>
+
+        <article class="game-card" data-name="Baklava Simülatörü" data-genre="experimental" data-type="web" data-year="2024">
+          <div class="album-art art9"><div class="title">BAKLAVA<br>SİMÜLATÖRÜ</div><div class="stamp">WEB GAME</div></div>
+          <h3>Baklava Simülatörü</h3><div class="meta"><span>Experimental</span><span>Web</span></div>
+          <button class="play">OYNA →</button>
+        </article>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="page" id="about">
+  <div class="content-card">
+    <div class="kicker">DÜKKANIN ARKA ODASI</div>
+    <h1>HAKKIMDA</h1>
+    <p>
+      Ben Emir. Oyun tasarımı ve geliştirme tarafında çalışan bağımsız bir geliştiriciyim.
+      Unreal Engine ve Godot ile oyunlar, prototipler ve game jam projeleri geliştiriyorum.
+      3D modelleme, görsel tasarım ve fiziksel üretim tarafıyla da ilgileniyorum.
+    </p>
+    <p>
+      Anadolu Saykodeli, klasik bir portfolyo gibi davranmak yerine yaptığım işleri bir plak dükkânı mantığıyla arşivlemek için var:
+      büyük projeler “38’lik”, daha küçük oyunlar, deneyler ve jam işleri “45’lik”.
+    </p>
+
+    <div class="about-grid">
+      <div class="mini-panel">
+        <h3>OYUN GELİŞTİRME</h3>
+        <p>Gameplay sistemleri, prototipleme, level tasarımı, Unreal Engine ve Godot.</p>
+      </div>
+      <div class="mini-panel">
+        <h3>GÖRSEL ÜRETİM</h3>
+        <p>3D modelleme, stil araştırması, retro estetikler, pixel-art odaklı küçük projeler.</p>
+      </div>
+      <div class="mini-panel">
+        <h3>GAME JAM</h3>
+        <p>Kısıtlı sürede küçük ama bitmiş fikirler çıkarmak; özellikle mekanik ve tema denemeleri.</p>
+      </div>
+      <div class="mini-panel">
+        <h3>ANADOLU SAYKODELİ</h3>
+        <p>Oyun portfolyosu, kişisel arşiv ve zamanla büyüyecek küçük bir internet oyun dükkânı.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="page" id="contact">
+  <div class="content-card">
+    <div class="kicker">İLETİŞİM</div>
+    <h1>BİR PLAK BIRAK.</h1>
+    <p>
+      Proje, iş, oyun, işbirliği veya sadece “bu neymiş?” diye yazmak için:
+    </p>
+    <a class="contact-link" href="mailto:emirozdemir2255@gmail.com">emirozdemir2255@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 ANADOLU SAYKODELİ</span>
+  <span>BAĞIMSIZ OYUN RAFI · İSTANBUL</span>
+</footer>
+
+</div>
+
+<script>
+const navButtons = document.querySelectorAll('.nav-btn');
+const pages = document.querySelectorAll('.page');
+const globalSearch = document.getElementById('globalSearch');
+const searchBtn = document.getElementById('searchBtn');
+
+function openPage(id){
+  pages.forEach(p => p.classList.toggle('active', p.id === id));
+  navButtons.forEach(b => b.classList.toggle('active', b.dataset.page === id));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+navButtons.forEach(btn=>{
+  btn.addEventListener('click',()=>openPage(btn.dataset.page));
+});
+
+function runGlobalSearch(){
+  const q = globalSearch.value.trim();
+  openPage('games');
+  applyFilters(q);
+}
+searchBtn.addEventListener('click', runGlobalSearch);
+globalSearch.addEventListener('keydown', e=>{
+  if(e.key === 'Enter') runGlobalSearch();
+});
+
+const genreFilters = [...document.querySelectorAll('.genre-filter')];
+const typeFilters = [...document.querySelectorAll('.type-filter')];
+const sortSelect = document.getElementById('sort');
+const clearFilters = document.getElementById('clearFilters');
+const gamesGrid = document.getElementById('gamesGrid');
+const count = document.getElementById('resultCount');
+
+function selectedValues(inputs){
+  return inputs.filter(i=>i.checked).map(i=>i.value);
+}
+
+function applyFilters(externalQuery=null){
+  const genres = selectedValues(genreFilters);
+  const types = selectedValues(typeFilters);
+  const q = (externalQuery !== null ? externalQuery : globalSearch.value).trim().toLocaleLowerCase('tr');
+
+  let cards = [...gamesGrid.querySelectorAll('.game-card')];
+
+  cards.forEach(card=>{
+    const name = card.dataset.name.toLocaleLowerCase('tr');
+    const matchesQ = !q || name.includes(q);
+    const matchesGenre = genres.length === 0 || genres.includes(card.dataset.genre);
+    const matchesType = types.length === 0 || types.includes(card.dataset.type);
+    card.classList.toggle('hidden', !(matchesQ && matchesGenre && matchesType));
+  });
+
+  const visible = cards.filter(c=>!c.classList.contains('hidden'));
+
+  visible.sort((a,b)=>{
+    if(sortSelect.value === 'name'){
+      return a.dataset.name.localeCompare(b.dataset.name,'tr');
+    }
+    return Number(b.dataset.year)-Number(a.dataset.year);
+  });
+  visible.forEach(c=>gamesGrid.appendChild(c));
+
+  count.textContent = `${visible.length} PLAK BULUNDU`;
+}
+
+[...genreFilters,...typeFilters].forEach(el=>el.addEventListener('change',()=>applyFilters()));
+sortSelect.addEventListener('change',()=>applyFilters());
+
+clearFilters.addEventListener('click',()=>{
+  [...genreFilters,...typeFilters].forEach(i=>i.checked=false);
+  globalSearch.value='';
+  sortSelect.value='new';
+  applyFilters('');
+});
+
+document.querySelectorAll('.play').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    alert('Bu butonu sonra gerçek oyun sayfasına / WebGL buildine bağlarız.');
+  });
+});
+</script>
+</body>
+</html>
