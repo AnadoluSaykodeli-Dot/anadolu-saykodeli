@@ -19,7 +19,7 @@ const projects = [
       "Dino Run 3310, Nokia 3310 tarzı 84×48 ekranın kısıtlamaları etrafında tasarlanmış, iki renkli küçük bir platform koşu oyunudur.",
 
     details:
-      "Arkandan yaklaşan bir yok oluş dalgası eşliğinde tarih öncesi manzaralarda koş. Arazideki engellerden kaç, seni yavaşlatan bitki örtüsünü aş, kaçışan dinozorların üzerinden atla ve her bölümün sonuna ulaşacak kadar hayatta kal. Farklı dinozorlar felakete farklı tepki verir: bazıları seninle birlikte kaçar, bazıları ters yönden gelir, bazılarıysa daha kötü bir şeyden kaçıyor olabilir.",
+      "Arkandan yaklaşan bir kıyamet dalgası eşliğinde tarih öncesi manzaralarda koş. Arazideki engellerden kaç, seni yavaşlatan bitki örtüsünü aş, kaçışan dinozorların üzerinden atla ve her bölümün sonuna ulaşacak kadar hayatta kal. Farklı dinozorlar felakete farklı tepki verir: bazıları seninle birlikte kaçar, bazıları ters yönden gelir, bazılarıysa daha kötü bir şeyden kaçıyor olabilir.",
 
     controls: [
       "← / → — Hareket et",
