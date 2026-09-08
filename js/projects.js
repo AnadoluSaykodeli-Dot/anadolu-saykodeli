@@ -27,5 +27,32 @@ const projects = [
       "↓ — Hızlı düş",
       "Space — Başlat / Devam et"
     ]
+  },
+
+  {
+    id: "mothership",
+
+    title: "Mothership",
+
+    type: "game",
+    format: "33",
+
+    genre: "roguelike",
+    year: 2026,
+
+    cover: "images/mothership.png",
+
+    playable: true,
+    url: "games/mothership/",
+
+    description:
+      "Mothership, düşman sürülerine karşı hayatta kalmaya çalıştığın, uzayda geçen top-down bir roguelike aksiyon oyunudur.",
+
+    details:
+      "Gemini yönet, düşman dalgaları arasında hayatta kal, deneyim ve kaynak topla ve koşu boyunca yeni güçlendirmeler kazan. Silahların otomatik olarak hedeflere ateş ederken sen konumunu, hareketini ve geliştirmelerini yöneterek giderek büyüyen düşman sürülerine karşı koyarsın.",
+
+    controls: [
+      "WASD — Hareket et"
+    ]
   }
 ];
