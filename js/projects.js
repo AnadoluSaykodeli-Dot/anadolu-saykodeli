@@ -34,7 +34,7 @@ const projects = [
 
     title: "Mothership",
 
-    type: "game",
+    type: "demo",
     format: "33",
 
     genre: "roguelike",
