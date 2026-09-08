@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no"
+    >
+    <title>Mothership</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #e9d6a9;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(circle at 10% 0%, rgba(255,255,255,.45), transparent 28%),
+                radial-gradient(circle at 90% 60%, rgba(179,77,40,.06), transparent 30%),
+                #e9d6a9;
+
+            color: #241b13;
+
+            transition: opacity .4s ease, visibility .4s ease;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            width: min(430px, 86vw);
+            text-align: center;
+        }
+
+        .brand {
+            line-height: .82;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .brand-top {
+            font-size: 54px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: #39442a;
+        }
+
+        .brand-bottom {
+            margin-top: 6px;
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #b34d28;
+        }
+
+        /* PLAK */
+        .record-wrap {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto 28px;
+        }
+
+        .record {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at center, rgba(255,255,255,.08) 0 8%, transparent 8.5%),
+                repeating-radial-gradient(
+                    circle at center,
+                    #141210 0px,
+                    #141210 6px,
+                    #201c19 7px,
+                    #201c19 10px
+                );
+
+            box-shadow:
+                inset 0 0 0 2px rgba(255,255,255,.06),
+                inset 0 0 0 10px rgba(0,0,0,.18),
+                0 16px 28px rgba(53,34,17,.25);
+
+            animation: spin 2.8s linear infinite;
+        }
+
+        .record::before {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.04);
+            pointer-events: none;
+        }
+
+        .record::after {
+            content: "";
+            position: absolute;
+            inset: 22px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.05);
+            pointer-events: none;
+        }
+
+        .label {
+            position: absolute;
+            width: 74px;
+            height: 74px;
+            left: 53px;
+            top: 53px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #b34d28;
+            border: 5px solid #d0a140;
+            box-shadow: 0 0 0 3px rgba(36,27,19,.18);
+        }
+
+        .label img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .spindle-hole {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            left: 85px;
+            top: 85px;
+            border-radius: 50%;
+            background: #efe0b8;
+            box-shadow: 0 0 0 2px rgba(36,27,19,.4);
+            z-index: 3;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        .loading-title {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #39442a;
+        }
+
+        .progress {
+            width: 100%;
+            height: 12px;
+            margin-top: 14px;
+            padding: 2px;
+            border: 1px solid #7e6747;
+            background: rgba(247,237,207,.55);
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #39442a;
+            transition: width .12s linear;
+        }
+
+        #percentage {
+            margin-top: 8px;
+            font-family: monospace;
+            font-size: 11px;
+            font-weight: bold;
+            color: #66543b;
+        }
+
+        .tagline {
+            margin-top: 30px;
+            font-family: monospace;
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: #7e6747;
+        }
+
+        #error-message {
+            display: none;
+            margin-top: 16px;
+            font-family: monospace;
+            font-size: 11px;
+            line-height: 1.6;
+            color: #8c3020;
+        }
+
+        @media (max-width: 500px) {
+            .brand-top {
+                font-size: 42px;
+            }
+
+            .brand-bottom {
+                font-size: 24px;
+            }
+
+            .record {
+                width: 145px;
+                height: 145px;
+            }
+
+            .label {
+                width: 60px;
+                height: 60px;
+                left: 42.5px;
+                top: 42.5px;
+            }
+
+            .spindle-hole {
+                width: 8px;
+                height: 8px;
+                left: 68.5px;
+                top: 68.5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <div id="loader">
+        <div class="loader-content">
+            <div class="brand">
+                <div class="brand-top">ANADOLU</div>
+                <div class="brand-bottom">SAYKODELİ</div>
+            </div>
+
+            <div class="record-wrap">
+                <div class="record">
+                    <div class="label">
+                        <img id="cover-image" src="cover.png" alt="Kapak">
+                    </div>
+                    <div class="spindle-hole"></div>
+                </div>
+            </div>
+
+            <div class="loading-title" id="loading-title">
+                PLAK HAZIRLANIYOR...
+            </div>
+
+            <div class="progress">
+                <div id="progress-bar"></div>
+            </div>
+
+            <div id="percentage">0%</div>
+
+            <div id="error-message">
+                OYUN YÜKLENEMEDİ.<br>
+                SAYFAYI YENİLEYİP TEKRAR DENE.
+            </div>
+
+            <div class="tagline">
+                OYUNLAR · DENEYLER · ETKİLEŞİMLİ İŞLER
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+
+    <script>
+        const loader = document.getElementById("loader");
+        const progressBar = document.getElementById("progress-bar");
+        const percentage = document.getElementById("percentage");
+        const loadingTitle = document.getElementById("loading-title");
+        const errorMessage = document.getElementById("error-message");
+        const coverImage = document.getElementById("cover-image");
+
+        coverImage.onerror = function () {
+            this.style.display = "none";
+        };
+
+        const engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1162376,"index.wasm":37900721},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
+
+        function updateProgress(current, total) {
+            if (total > 0) {
+                let percent = Math.round((current / total) * 100);
+                percent = Math.max(0, Math.min(100, percent));
+
+                progressBar.style.width = percent + "%";
+                percentage.textContent = percent + "%";
+
+                if (percent >= 90) {
+                    loadingTitle.textContent = "İĞNE PLAĞA İNİYOR...";
+                } else {
+                    loadingTitle.textContent = "PLAK HAZIRLANIYOR...";
+                }
+            } else {
+                percentage.textContent = "YÜKLENİYOR...";
+            }
+        }
+
+        engine.startGame({
+            onProgress: updateProgress
+        })
+        .then(() => {
+            progressBar.style.width = "100%";
+            percentage.textContent = "100%";
+            loadingTitle.textContent = "HAZIR";
+
+            setTimeout(() => {
+                loader.classList.add("hidden");
+            }, 350);
+        })
+        .catch((error) => {
+            console.error(error);
+            loadingTitle.textContent = "BİR ŞEYLER TERS GİTTİ";
+            percentage.style.display = "none";
+            errorMessage.style.display = "block";
+        });
+    </script>
+</body>
+</html>
