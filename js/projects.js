@@ -54,5 +54,35 @@ const projects = [
     controls: [
       "WASD — Hareket et"
     ]
-  }
+  },
+
+{
+  id: "tweft",
+
+  title: "To Whoever Finds This",
+
+  type: "game",
+  format: "45",
+
+  genre: "experimental",
+  year: 2026,
+
+  cover: "images/tweft.png",
+
+  delivery: "web",
+  playable: true,
+  url: "games/tweft/",
+
+  description:
+    "To Whoever Finds This, gün batımındaki sakin bir kıyıda kendinle baş başa kaldığın kısa, melankolik bir deneyim.",
+
+  details:
+    "Sorular üzerine düşün, içinden geçenleri kâğıda dök ve bir şişenin içinde denize bırak. Bazen yazmak, bir cevap bulmaktan çok bırakabilmek içindir.",
+
+  controls: [
+    "WASD — Hareket",
+    "Mouse — Bakış",
+    "E — Etkileşim"
+  ]
+}
 ];
