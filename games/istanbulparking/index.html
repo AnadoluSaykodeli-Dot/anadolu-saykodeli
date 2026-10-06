@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#3c482c">
+  <title>Istanbul Parking · Anadolu Saykodeli</title>
+  <link rel="icon" href="index.icon.png" type="image/png">
+  <link rel="stylesheet" href="../../css/player.css">
+</head>
+<body>
+  <main id="player" class="player">
+    <header class="player-toolbar">
+      <a class="back-link" data-back-link href="../../#/proje/istanbulparking">← Rafa dön</a>
+      <div class="player-heading">
+        <p class="eyebrow">Anadolu Saykodeli · Dinleme kabini</p>
+        <h1 id="game-title">Istanbul Parking</h1>
+      </div>
+      <div class="player-actions" aria-label="Oyun araçları">
+        <button id="controls-button" class="player-button" type="button" aria-haspopup="dialog" aria-controls="controls-dialog">Kontroller</button>
+        <button id="fullscreen-button" class="player-button" type="button" aria-pressed="false">Tam ekran</button>
+      </div>
+    </header>
+    <section id="player-stage" class="player-stage" aria-label="Oyun" aria-busy="true">
+      <canvas id="canvas" tabindex="0" aria-label="Istanbul Parking">Tarayıcın oyun ekranını desteklemiyor.</canvas>
+      <div id="loader" class="loader">
+        <div class="loader-content">
+          <div class="loader-brand" aria-hidden="true">ANADOLU<span>SAYKODELİ</span></div>
+          <div class="record" aria-hidden="true"><img id="cover-image" src="cover.png" alt=""></div>
+          <h2 id="loading-title" role="status" aria-live="polite">Plak hazırlanıyor…</h2>
+          <p id="loading-description" class="loader-description">Kayıt hazır olduğunda oyun açılacak.</p>
+          <progress id="load-progress" class="loader-progress" aria-label="Oyun indirme ilerlemesi"></progress>
+          <p id="load-amount" class="load-amount">Oyun motoruna bağlanılıyor…</p>
+          <div id="error-actions" class="error-actions" hidden>
+            <button id="retry-button" class="player-button primary" type="button">Yeniden dene</button>
+            <a class="player-button" data-back-link href="../../#/proje/istanbulparking">Rafa dön</a>
+          </div>
+          <details id="error-details" class="error-details" hidden><summary>Teknik ayrıntı</summary><pre id="error-text"></pre></details>
+          <p class="loader-tagline">OYUNLAR · DENEYLER · ETKİLEŞİMLİ İŞLER</p>
+        </div>
+      </div>
+      <p id="player-notice" class="player-notice" role="status" hidden></p>
+    </section>
+    <dialog id="controls-dialog" class="controls-dialog" aria-labelledby="controls-title">
+      <p class="eyebrow">A yüzü · Nasıl oynanır?</p>
+      <h2 id="controls-title">Kontroller</h2>
+      <ul id="controls-list" class="controls-list"></ul>
+      <p class="controls-note">Bu panel oyunu duraklatmayabilir. Oyuna dönmek için paneli kapatıp oyun alanına tıkla.</p>
+      <form method="dialog"><button class="player-button primary" value="close">Oyuna dön</button></form>
+    </dialog>
+  </main>
+  <noscript><p class="noscript">Oyunu açmak için JavaScript etkin olmalı. <a href="../../#/proje/istanbulparking">Rafa dön.</a></p></noscript>
+  <script id="game-config" type="application/json">{"projectId":"istanbulparking","title":"Istanbul Parking","threads":false,"engine":{"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1289220,"index.wasm":37900721},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4}}</script>
+  <script src="../../js/projects.js"></script>
+  <script src="index.js"></script>
+  <script src="../../js/player.js"></script>
+</body>
+</html>

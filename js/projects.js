@@ -1,88 +1,89 @@
-const projects = [
+// Yeni projeleri listenin başına ekle. Tür, durum ve plak formatı bağımsızdır.
+// Kapak varyantları: python tools/optimize_covers.py images/yeni-proje.png
+window.projects = [
+  {
+    id: "istanbulparking",
+    title: "İstanbul Parking",
+    type: "game",
+    status: "demo",
+    format: "45",
+    genre: "driving",
+    year: 2026,
+    catalogNumber: "AS-004",
+    featured: true,
+    cover: "images/istanbulparking.png",
+    coverThumb: "images/optimized/istanbulparking-480.webp",
+    coverLarge: "images/optimized/istanbulparking-960.webp",
+    delivery: "web",
+    playable: true,
+    url: "games/istanbulparking/",
+    input: "keyboard",
+    description: "İstanbul’un dar sokaklarında direksiyon başına geç. Kendine bir park yeri bul, arabanı dar aralıklardan geçir ve şehrin küçük boşluklarına sığdır.",
+    details: "Bu kısa sürüş demosunda hedefin İstanbul’un dar sokaklarında park yeri aramak ve aracını yerine yerleştirmek. Kamerayı yakınlaştırıp uzaklaştırarak çevreni incele, uygun boşluğu bul ve son manevranı yap.",
+    notes: "Devam eden bir oyun demosu. Bu sürüm, dar sokaklarda sürüş ve park etme fikrini keşfetmek için rafa bırakıldı.",
+    controls: ["WASD — Sürüş", "E / Q — Kamerayı yakınlaştır / uzaklaştır", "Shift — Hızlan", "Space — Park et", "R — Yeniden başlat"]
+  },
+  {
+    id: "tweft",
+    title: "To Whoever Finds This",
+    type: "game",
+    status: "released",
+    format: "45",
+    genre: "experimental",
+    year: 2026,
+    catalogNumber: "AS-003",
+    cover: "images/tweft.png",
+    coverThumb: "images/optimized/tweft-480.webp",
+    coverLarge: "images/optimized/tweft-960.webp",
+    delivery: "web",
+    playable: true,
+    url: "games/tweft/",
+    input: "keyboard-mouse",
+    description: "Gün batımındaki sakin bir kıyıda kendinle baş başa kaldığın kısa, melankolik bir deneyim.",
+    details: "Sorular üzerine düşün, içinden geçenleri kâğıda dök ve bir şişenin içinde denize bırak. Bazen yazmak, bir cevap bulmaktan çok bırakabilmek içindir.",
+    notes: "Yazmak ve bırakmak üzerine kısa, deneysel bir çalışma. Bu kaydın merkezinde kıyının sakinliği ve oyuncunun kendi düşünceleri var.",
+    controls: ["WASD — Hareket", "Mouse — Bakış", "E — Etkileşim"]
+  },
   {
     id: "dinorun3310",
-
     title: "Dino Run 3310",
-
     type: "game",
+    status: "released",
     format: "45",
-
     genre: "arcade",
     year: 2026,
-
+    catalogNumber: "AS-002",
     cover: "images/dinorun3310.png",
-
+    coverThumb: "images/optimized/dinorun3310-480.webp",
+    coverLarge: "images/optimized/dinorun3310-960.webp",
+    delivery: "web",
     playable: true,
     url: "games/dinorun3310/",
-
-    description:
-      "Dino Run 3310, Nokia 3310 tarzı 84×48 ekranın kısıtlamaları etrafında tasarlanmış, iki renkli küçük bir platform koşu oyunudur.",
-
-    details:
-      "Arkandan yaklaşan bir kıyamet dalgası eşliğinde tarih öncesi manzaralarda koş. Arazideki engellerden kaç, seni yavaşlatan bitki örtüsünü aş, kaçışan dinozorların üzerinden atla ve her bölümün sonuna ulaşacak kadar hayatta kal. Farklı dinozorlar felakete farklı tepki verir: bazıları seninle birlikte kaçar, bazıları ters yönden gelir, bazılarıysa daha kötü bir şeyden kaçıyor olabilir.",
-
-    controls: [
-      "← / → — Hareket et",
-      "↑ — Zıpla",
-      "↓ — Hızlı düş",
-      "Space — Başlat / Devam et"
-    ]
+    input: "keyboard",
+    description: "Nokia 3310 tarzı 84 × 48 ekranın kısıtlamaları etrafında tasarlanmış, iki renkli küçük bir platform koşu oyunu.",
+    details: "Arkandan yaklaşan bir kıyamet dalgası eşliğinde tarih öncesi manzaralarda koş. Arazideki engellerden kaç, seni yavaşlatan bitki örtüsünü aş, kaçışan dinozorların üzerinden atla ve her bölümün sonuna ulaşacak kadar hayatta kal. Farklı dinozorlar felakete farklı tepki verir: bazıları seninle birlikte kaçar, bazıları ters yönden gelir, bazılarıysa daha kötü bir şeyden kaçıyor olabilir.",
+    notes: "Bu oyunun çıkış noktası Nokia 3310’un 84 × 48 ekranı ve iki renk sınırı. Küçük bir görüntü alanında hareketi ve tehlikeyi okunur tutan bir koşu deneyimi.",
+    controls: ["← / → — Hareket et", "↑ — Zıpla", "↓ — Hızlı düş", "Space — Başlat / Devam et"]
   },
-
   {
     id: "mothership",
-
     title: "Mothership",
-
-    type: "demo",
+    type: "game",
+    status: "demo",
     format: "33",
-
     genre: "roguelike",
     year: 2026,
-
+    catalogNumber: "LUM-017",
     cover: "images/mothership.png",
-
+    coverThumb: "images/optimized/mothership-480.webp",
+    coverLarge: "images/optimized/mothership-960.webp",
+    delivery: "web",
     playable: true,
     url: "games/mothership/",
-
-    description:
-      "Mothership, düşman sürülerine karşı hayatta kalmaya çalıştığın, uzayda geçen top-down bir roguelike aksiyon oyunudur.",
-
-    details:
-      "Gemini yönet, düşman dalgaları arasında hayatta kal, deneyim ve kaynak topla ve koşu boyunca yeni güçlendirmeler kazan. Silahların otomatik olarak hedeflere ateş ederken sen konumunu, hareketini ve geliştirmelerini yöneterek giderek büyüyen düşman sürülerine karşı koyarsın.",
-
-    controls: [
-      "WASD — Hareket et"
-    ]
-  },
-
-{
-  id: "tweft",
-
-  title: "To Whoever Finds This",
-
-  type: "game",
-  format: "45",
-
-  genre: "experimental",
-  year: 2026,
-
-  cover: "images/tweft.png",
-
-  delivery: "web",
-  playable: true,
-  url: "games/tweft/",
-
-  description:
-    "To Whoever Finds This, gün batımındaki sakin bir kıyıda kendinle baş başa kaldığın kısa, melankolik bir deneyim.",
-
-  details:
-    "Sorular üzerine düşün, içinden geçenleri kâğıda dök ve bir şişenin içinde denize bırak. Bazen yazmak, bir cevap bulmaktan çok bırakabilmek içindir.",
-
-  controls: [
-    "WASD — Hareket",
-    "Mouse — Bakış",
-    "E — Etkileşim"
-  ]
-}
+    input: "keyboard",
+    description: "Düşman sürülerine karşı hayatta kalmaya çalıştığın, uzayda geçen top-down bir roguelike aksiyon oyunu.",
+    details: "Gemini yönet, düşman dalgaları arasında hayatta kal, deneyim ve kaynak topla ve koşu boyunca yeni güçlendirmeler kazan. Silahların otomatik olarak hedeflere ateş ederken sen konumunu, hareketini ve geliştirmelerini yöneterek giderek büyüyen düşman sürülerine karşı koyarsın.",
+    notes: "Geliştirme aşamasındaki bir roguelike aksiyon demosu. Otomatik ateş eden silahlar, geminin konumu ve koşu boyunca seçilen güçlendirmeler üzerine kurulu.",
+    controls: ["WASD — Hareket et"]
+  }
 ];
