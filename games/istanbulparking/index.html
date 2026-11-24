@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta
@@ -262,14 +262,14 @@
             <div class="record-wrap">
                 <div class="record">
                     <div class="label">
-                        <img id="cover-image" src="cover.png" alt="Kapak">
+                        <img id="cover-image" src="cover.png" alt="Record cover">
                     </div>
                     <div class="spindle-hole"></div>
                 </div>
             </div>
 
             <div class="loading-title" id="loading-title">
-                PLAK HAZIRLANIYOR...
+                PREPARING THE RECORD...
             </div>
 
             <div class="progress">
@@ -279,12 +279,12 @@
             <div id="percentage">0%</div>
 
             <div id="error-message">
-                OYUN YÜKLENEMEDİ.<br>
-                SAYFAYI YENİLEYİP TEKRAR DENE.
+                COULD NOT LOAD THE GAME.<br>
+                REFRESH THE PAGE AND TRY AGAIN.
             </div>
 
             <div class="tagline">
-                OYUNLAR · DENEYLER · ETKİLEŞİMLİ İŞLER
+                GAMES · EXPERIMENTS · INTERACTIVE WORK
             </div>
         </div>
     </div>
@@ -303,7 +303,7 @@
             this.style.display = "none";
         };
 
-        const engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":4435560,"index.wasm":37900721},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
+        const engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":3884544,"index.wasm":37900721},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
 
         function updateProgress(current, total) {
             if (total > 0) {
@@ -314,12 +314,12 @@
                 percentage.textContent = percent + "%";
 
                 if (percent >= 90) {
-                    loadingTitle.textContent = "İĞNE PLAĞA İNİYOR...";
+                    loadingTitle.textContent = "DROPPING THE NEEDLE...";
                 } else {
-                    loadingTitle.textContent = "PLAK HAZIRLANIYOR...";
+                    loadingTitle.textContent = "PREPARING THE RECORD...";
                 }
             } else {
-                percentage.textContent = "YÜKLENİYOR...";
+                percentage.textContent = "LOADING...";
             }
         }
 
@@ -329,7 +329,7 @@
         .then(() => {
             progressBar.style.width = "100%";
             percentage.textContent = "100%";
-            loadingTitle.textContent = "HAZIR";
+            loadingTitle.textContent = "READY";
 
             setTimeout(() => {
                 loader.classList.add("hidden");
@@ -337,7 +337,7 @@
         })
         .catch((error) => {
             console.error(error);
-            loadingTitle.textContent = "BİR ŞEYLER TERS GİTTİ";
+            loadingTitle.textContent = "SOMETHING WENT WRONG";
             percentage.style.display = "none";
             errorMessage.style.display = "block";
         });
